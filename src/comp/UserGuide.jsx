@@ -9,7 +9,7 @@ export const UserGuide = () => {
     <button className="btn-dark" onClick={toggle}>
         User Guide
       </button>
-    <div className={`amp--userguide ${openOrClose === false ? "closeModal" : "openModal"}`}>  
+    <div className={`ocml-amp--userguide ${openOrClose === false ? "closeModal" : "openModal"}`}>  
       <div className="modal">
         <div className="modal--header">
           <h1>User Guide</h1> <button className="btn-light" onClick={toggle}>X</button>

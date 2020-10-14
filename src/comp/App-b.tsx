@@ -1,14 +1,28 @@
-import React, { useState, useRef, Fragment } from "react";
-import { Knob, Pointer, Value, Arc } from "rc-knob";
+import React, { useState, useRef, MutableRefObject } from "react";
+import Knob from "rc-knob";
+import Pointer from "rc-knob";
+import Value from "rc-knob";
+import Arc from "rc-knob";
 import { UserGuide } from "./UserGuide";
 import "./App.scss";
 import amp from "../img/amp-bg.png";
 
+interface Viz extends MutableRefObject<any> {
+  width?: number;
+  height?: number;
+  current: any;
+}
+
+interface CheckInput extends MutableRefObject<any> {
+  checked?: boolean | undefined;
+  current: any;
+}
+
 const timeConstant = 0;
 
 const App = () => {
-  const visualizer = useRef(null);
-  const overDriveEl = useRef(null);
+  const visualizer: Viz = useRef(null);
+  const overDriveEl: CheckInput = useRef(null);
   const [overDrive, setOverDrive] = useState(() => false);
   const [context] = useState(() => new AudioContext());
   const [gainNode] = useState(() => new GainNode(context, { gain: 0 }));
@@ -63,28 +77,28 @@ const App = () => {
     }
   };
 
-  const handleVolume = (val) => {
+  const handleVolume = (val: number) => {
     gainNode.gain.setTargetAtTime(val, context.currentTime, timeConstant);
     assignContext();
   };
 
-  const handleBass = (val) => {
+  const handleBass = (val: number) => {
     bassEQ.gain.setTargetAtTime(val, context.currentTime, timeConstant);
     assignContext();
   };
 
-  const handleMid = (val) => {
+  const handleMid = (val: number) => {
     midEQ.gain.setTargetAtTime(val, context.currentTime, timeConstant);
     assignContext();
   };
 
-  const handleTreble = (val) => {
+  const handleTreble = (val: number) => {
     trebleEQ.gain.setTargetAtTime(val, context.currentTime, timeConstant);
     assignContext();
   };
 
   // http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
-  const makeDistortionCurve = (amount) => {
+  const makeDistortionCurve = (amount: number) => {
     var k = typeof amount === "number" ? amount : 50,
       n_samples = 44100,
       curve = new Float32Array(n_samples),
@@ -95,6 +109,7 @@ const App = () => {
       x = (i * 2) / n_samples - 1;
       curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
     }
+    console.log(curve);
     return curve;
   };
   const overDriveClick = () => {
@@ -103,6 +118,7 @@ const App = () => {
     if (overDriveEl.current != null) {
       overDriveOn = !overDriveEl.current.checked;
     }
+    console.log(overDriveOn);
     if (overDriveOn === true) {
       distortion.oversample = "4x";
       distortion.curve = makeDistortionCurve(400);
@@ -126,7 +142,7 @@ const App = () => {
       .connect(context.destination);
     drawVisualizer();
   };
-  function drawVisualizer() {
+  function drawVisualizer(): void {
     resize();
     requestAnimationFrame(drawVisualizer);
     const viz = visualizer.current;
@@ -136,7 +152,7 @@ const App = () => {
     const height = viz.height;
     const barWidth = width / bufferLength;
     const canvasContext = viz.getContext("2d");
-    cancelAnimationFrame(drawVisualizer);
+    // cancelAnimationFrame(drawVisualizer);
     dataArray.forEach((item, index) => {
       const y = ((item / 170) * height) / 2;
       const x = barWidth * index;
@@ -148,20 +164,20 @@ const App = () => {
     });
   }
   return (
-    <Fragment>
+    <div>
       <UserGuide />
       <div className="amp--wrap">
-        <div className="ocml-amp--controls">
-          <div className="ocml-amp--controls--wrap">
-            <label className="ocml-amp--controls--label">Volume</label>
+        <div className="amp--controls">
+          <div className="amp--controls--wrap">
+            <label className="amp--controls--label">Volume</label>
             <Knob
               size={100}
               angleOffset={220}
               angleRange={280}
               min={0}
               max={100}
-              className="ocml-amp--controls--knob"
-              onChange={(e) => handleVolume(e / 100)}
+              className="amp--controls--knob"
+              onChange={(e: number) => handleVolume(e / 100)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -169,7 +185,7 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="ocml-amp--controls--wrap">
+          <div className="amp--controls--wrap">
             <label className="amp--controls--label">Bass</label>
             <Knob
               size={100}
@@ -177,8 +193,8 @@ const App = () => {
               angleRange={280}
               min={-100}
               max={100}
-              className="ocml-amp--controls--knob"
-              onChange={(e) => handleBass(e * 0.1)}
+              className="amp--controls--knob"
+              onChange={(e: number) => handleBass(e * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -186,7 +202,7 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="ocml-amp--controls--wrap">
+          <div className="amp--controls--wrap">
             <label className="amp--controls--label">Mid</label>
             <Knob
               size={100}
@@ -194,8 +210,8 @@ const App = () => {
               angleRange={280}
               min={-100}
               max={100}
-              className="ocml-amp--controls--knob"
-              onChange={(e) => handleMid(e * 0.1)}
+              className="amp--controls--knob"
+              onChange={(e: number) => handleMid(e * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -203,7 +219,7 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="ocml-amp--controls--wrap">
+          <div className="amp--controls--wrap">
             <label className="amp--controls--label">Treble</label>
             <Knob
               size={100}
@@ -211,8 +227,8 @@ const App = () => {
               angleRange={280}
               min={-100}
               max={100}
-              className="ocml-amp--controls--knob"
-              onChange={(e) => handleTreble(e * 0.1)}
+              className="amp--controls--knob"
+              onChange={(e: number) => handleTreble(e * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -220,7 +236,7 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="ocml-amp--controls--wrap checkbox--wrap">
+          <div className="amp--controls--wrap checkbox--wrap">
             <label className="amp--controls--label">Over Drive</label>
             <input
               ref={overDriveEl}
@@ -232,12 +248,12 @@ const App = () => {
             <span onClick={overDriveClick} className="checkmark" />
           </div>
         </div>
-        <div className="ocml-amp--speaker">
-          <img src={amp} className="ocml-amp--bg" alt="amp" />
-          <canvas className="ocml-amp--viz" ref={visualizer} />
+        <div className="amp--speaker">
+          <img src={amp} className="amp--bg" alt="amp" />
+          <canvas className="amp--viz" ref={visualizer} />
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
