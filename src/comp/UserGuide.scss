@@ -1,0 +1,61 @@
+.amp--userguide {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.99);
+  color: #ffffff;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10vh;
+  visibility: hidden;
+
+  &.closeModal {
+    z-index: 0;
+    animation: closeModal 0.03s ease-in-out 0s 1 normal forwards;
+  }
+
+  &.openModal {
+    z-index: 1;
+    animation: openModal 0.03s ease-in-out 0s 1 normal forwards;
+  }
+
+  .modal {
+    &--header {
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      justify-content: space-between;
+      h1 {
+        font-weight: 900;
+      }
+    }
+    &--body {
+      ol {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+@keyframes openModal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
