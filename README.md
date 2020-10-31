@@ -1,6 +1,6 @@
 # OC Media Lab Amp
 
-> A webapp microphone/intrument amp built with react.
+> An amp built with react and typescript.
 
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Inspired by: [YouTube Video](https://www.youtube.com/watch?v=eEeUFB1iIDo).
