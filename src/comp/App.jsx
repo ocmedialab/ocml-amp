@@ -170,7 +170,7 @@ const App = () => {
             </Knob>
           </div>
           <div className="ocml-amp--controls--wrap">
-            <label className="amp--controls--label">Bass</label>
+            <label className="ocml-amp--controls--label">Bass</label>
             <Knob
               size={100}
               angleOffset={220}
@@ -187,7 +187,7 @@ const App = () => {
             </Knob>
           </div>
           <div className="ocml-amp--controls--wrap">
-            <label className="amp--controls--label">Mid</label>
+            <label className="ocml-amp--controls--label">Mid</label>
             <Knob
               size={100}
               angleOffset={220}
@@ -204,7 +204,7 @@ const App = () => {
             </Knob>
           </div>
           <div className="ocml-amp--controls--wrap">
-            <label className="amp--controls--label">Treble</label>
+            <label className="ocml-amp--controls--label">Treble</label>
             <Knob
               size={100}
               angleOffset={220}
@@ -221,7 +221,7 @@ const App = () => {
             </Knob>
           </div>
           <div className="ocml-amp--controls--wrap checkbox--wrap">
-            <label className="amp--controls--label">Over Drive</label>
+            <label className="ocml-amp--controls--label">Over Drive</label>
             <input
               ref={overDriveEl}
               className="checkbox"
