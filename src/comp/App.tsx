@@ -1,34 +1,19 @@
-import React, { useState, useRef, MutableRefObject } from "react";
-import Knob from "rc-knob";
-import Pointer from "rc-knob";
-import Value from "rc-knob";
-import Arc from "rc-knob";
-import { UserGuide } from "./UserGuide";
+import React, { useState, useRef } from "react";
+// @ts-ignore
+import { Knob, Pointer, Value, Arc } from "rc-knob";
+import UserGuide from "./UserGuide";
 import "./App.scss";
 import amp from "../img/amp-bg.png";
-
-interface Viz extends MutableRefObject<any> {
-  width?: number;
-  height?: number;
-  current: any;
-}
-
-interface CheckInput extends MutableRefObject<any> {
-  checked?: boolean | undefined;
-  current: any;
-}
 
 const timeConstant = 0;
 
 const App = () => {
-  const visualizer: Viz = useRef(null);
-  const overDriveEl: CheckInput = useRef(null);
+  const visualizer = useRef<null | HTMLCanvasElement>(null);
+  const overDriveEl = useRef<null | HTMLInputElement>(null);
   const [overDrive, setOverDrive] = useState(() => false);
   const [context] = useState(() => new AudioContext());
   const [gainNode] = useState(() => new GainNode(context, { gain: 0 }));
-  const [analyserNode] = useState(
-    () => new AnalyserNode(context, { fftSize: 256 })
-  );
+  const [analyserNode] = useState(() => new AnalyserNode(context, { fftSize: 256 }));
   const [bufferLength] = useState(() => analyserNode.frequencyBinCount);
   const [bassEQ] = useState(
     () =>
@@ -58,8 +43,8 @@ const App = () => {
 
   const [distortion] = useState(() => context.createWaveShaper());
 
-  const getIntrument = () => {
-    return navigator.mediaDevices.getUserMedia({
+  const getIntrument = () =>
+    navigator.mediaDevices.getUserMedia({
       audio: {
         echoCancellation: false,
         autoGainControl: false,
@@ -67,7 +52,6 @@ const App = () => {
         latency: 0,
       },
     });
-  };
 
   const resize = () => {
     const viz = visualizer.current;
@@ -77,6 +61,46 @@ const App = () => {
     }
   };
 
+  function drawVisualizer() {
+    resize();
+    requestAnimationFrame(drawVisualizer);
+    const viz = visualizer.current as HTMLCanvasElement;
+    const { width, height } = viz;
+    const dataArray = new Uint8Array(bufferLength);
+    analyserNode.getByteFrequencyData(dataArray);
+    const barWidth = width / bufferLength;
+    const canvasContext = viz.getContext("2d") as CanvasRenderingContext2D;
+
+    cancelAnimationFrame(drawVisualizer as any);
+    dataArray.forEach((item, index) => {
+      const y = ((item / 170) * height) / 2;
+      const x = barWidth * index;
+
+      if (canvasContext) {
+        const gradient = canvasContext.createLinearGradient(0, 0, height, 0);
+        gradient.addColorStop(1, "#222222");
+        gradient.addColorStop(0, "#000000");
+        canvasContext.fillStyle = gradient;
+        canvasContext.fillRect(x, height - y, barWidth, y);
+      }
+    });
+  }
+
+  const assignContext = async () => {
+    const intrument = await getIntrument();
+    if (context.state === "suspended") await context.resume();
+    const source = context.createMediaStreamSource(intrument);
+    console.log(source);
+    source
+      .connect(distortion)
+      .connect(bassEQ)
+      .connect(midEQ)
+      .connect(trebleEQ)
+      .connect(gainNode)
+      .connect(analyserNode)
+      .connect(context.destination);
+    drawVisualizer();
+  };
   const handleVolume = (val: number) => {
     gainNode.gain.setTargetAtTime(val, context.currentTime, timeConstant);
     assignContext();
@@ -99,85 +123,50 @@ const App = () => {
 
   // http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
   const makeDistortionCurve = (amount: number) => {
-    var k = typeof amount === "number" ? amount : 50,
-      n_samples = 44100,
-      curve = new Float32Array(n_samples),
-      deg = Math.PI / 180,
-      i = 0,
-      x;
-    for (; i < n_samples; ++i) {
-      x = (i * 2) / n_samples - 1;
+    const k = typeof amount === "number" ? amount : 50;
+    const nSamples = 44100;
+    const curve = new Float32Array(nSamples);
+    const deg = Math.PI / 180;
+    let i = 0;
+    let x;
+    for (; i < nSamples; ++i) {
+      x = (i * 2) / nSamples - 1;
       curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
     }
-    console.log(curve);
     return curve;
   };
   const overDriveClick = () => {
     setOverDrive(!overDrive);
     let overDriveOn;
-    if (overDriveEl.current != null) {
+    if (overDriveEl.current !== null) {
       overDriveOn = !overDriveEl.current.checked;
-    }
-    console.log(overDriveOn);
-    if (overDriveOn === true) {
-      distortion.oversample = "4x";
-      distortion.curve = makeDistortionCurve(400);
-    } else {
-      distortion.oversample = "none";
-      distortion.curve = new Float32Array();
+
+      if (overDriveOn === true) {
+        distortion.oversample = "4x";
+        distortion.curve = makeDistortionCurve(400);
+      } else {
+        distortion.oversample = "none";
+        distortion.curve = new Float32Array();
+      }
     }
   };
 
-  const assignContext = async () => {
-    const intrument = await getIntrument();
-    if (context.state === "suspended") await context.resume();
-    const source = context.createMediaStreamSource(intrument);
-    source
-      .connect(distortion)
-      .connect(bassEQ)
-      .connect(midEQ)
-      .connect(trebleEQ)
-      .connect(gainNode)
-      .connect(analyserNode)
-      .connect(context.destination);
-    drawVisualizer();
-  };
-  function drawVisualizer(): void {
-    resize();
-    requestAnimationFrame(drawVisualizer);
-    const viz = visualizer.current;
-    const dataArray = new Uint8Array(bufferLength);
-    analyserNode.getByteFrequencyData(dataArray);
-    const width = viz.width;
-    const height = viz.height;
-    const barWidth = width / bufferLength;
-    const canvasContext = viz.getContext("2d");
-    // cancelAnimationFrame(drawVisualizer);
-    dataArray.forEach((item, index) => {
-      const y = ((item / 170) * height) / 2;
-      const x = barWidth * index;
-      const gradient = canvasContext.createLinearGradient(0, 0, height, 0);
-      gradient.addColorStop(1, "#222222");
-      gradient.addColorStop(0, "#000000");
-      canvasContext.fillStyle = gradient;
-      canvasContext.fillRect(x, height - y, barWidth, y);
-    });
-  }
   return (
-    <div>
+    <>
       <UserGuide />
       <div className="amp--wrap">
-        <div className="amp--controls">
-          <div className="amp--controls--wrap">
-            <label className="amp--controls--label">Volume</label>
+        <div className="ocml-amp--controls">
+          <div className="ocml-amp--controls--wrap">
+            <div className="ocml-amp--controls--label">Volume</div>
             <Knob
+              id="knob-volume"
               size={100}
               angleOffset={220}
               angleRange={280}
               min={0}
               max={100}
-              className="amp--controls--knob"
-              onChange={(e: number) => handleVolume(e / 100)}
+              className="ocml-amp--controls--knob"
+              onChange={(volume: number) => handleVolume(volume / 100)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -185,16 +174,16 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="amp--controls--wrap">
-            <label className="amp--controls--label">Bass</label>
+          <div className="ocml-amp--controls--wrap">
+            <div className="ocml-amp--controls--label">Bass</div>
             <Knob
               size={100}
               angleOffset={220}
               angleRange={280}
               min={-100}
               max={100}
-              className="amp--controls--knob"
-              onChange={(e: number) => handleBass(e * 0.1)}
+              className="ocml-amp--controls--knob"
+              onChange={(bass: number) => handleBass(bass * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -202,16 +191,16 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="amp--controls--wrap">
-            <label className="amp--controls--label">Mid</label>
+          <div className="ocml-amp--controls--wrap">
+            <div className="ocml-amp--controls--label">Mid</div>
             <Knob
               size={100}
               angleOffset={220}
               angleRange={280}
               min={-100}
               max={100}
-              className="amp--controls--knob"
-              onChange={(e: number) => handleMid(e * 0.1)}
+              className="ocml-amp--controls--knob"
+              onChange={(mid: number) => handleMid(mid * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -219,16 +208,17 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="amp--controls--wrap">
-            <label className="amp--controls--label">Treble</label>
+          <div className="ocml-amp--controls--wrap">
+            <div className="ocml-amp--controls--label">Treble</div>
             <Knob
+              id="knob-treble"
               size={100}
               angleOffset={220}
               angleRange={280}
               min={-100}
               max={100}
-              className="amp--controls--knob"
-              onChange={(e: number) => handleTreble(e * 0.1)}
+              className="ocml-amp--controls--knob"
+              onChange={(treble: number) => handleTreble(treble * 0.1)}
             >
               <Arc arcWidth={5} color="#000000" radius={47.5} />
               <circle r="40" cx="50" cy="50" />
@@ -236,8 +226,8 @@ const App = () => {
               <Value marginBottom={40} className="value" />
             </Knob>
           </div>
-          <div className="amp--controls--wrap checkbox--wrap">
-            <label className="amp--controls--label">Over Drive</label>
+          <div className="ocml-amp--controls--wrap checkbox--wrap">
+            <div className="ocml-amp--controls--label">Over Drive</div>
             <input
               ref={overDriveEl}
               className="checkbox"
@@ -248,12 +238,12 @@ const App = () => {
             <span onClick={overDriveClick} className="checkmark" />
           </div>
         </div>
-        <div className="amp--speaker">
-          <img src={amp} className="amp--bg" alt="amp" />
-          <canvas className="amp--viz" ref={visualizer} />
+        <div className="ocml-amp--speaker">
+          <img src={amp} className="ocml-amp--bg" alt="amp" />
+          <canvas className="ocml-amp--viz" ref={visualizer} />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
