@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 // @ts-ignore
-import { Knob, Pointer, Value, Arc } from "rc-knob";
-import UserGuide from "./UserGuide";
-import "./App.scss";
-import amp from "../img/amp-bg.png";
+import { Knob, Pointer, Value, Arc } from 'rc-knob';
+import UserGuide from './UserGuide';
+import './App.scss';
+import amp from '../img/amp-bg.png';
 
 const timeConstant = 0;
 
@@ -18,7 +18,7 @@ const App = () => {
   const [bassEQ] = useState(
     () =>
       new BiquadFilterNode(context, {
-        type: "lowshelf",
+        type: 'lowshelf',
         frequency: 500,
         gain: 0,
       })
@@ -26,7 +26,7 @@ const App = () => {
   const [midEQ] = useState(
     () =>
       new BiquadFilterNode(context, {
-        type: "peaking",
+        type: 'peaking',
         Q: Math.SQRT1_2,
         frequency: 1500,
         gain: 0,
@@ -35,7 +35,7 @@ const App = () => {
   const [trebleEQ] = useState(
     () =>
       new BiquadFilterNode(context, {
-        type: "highshelf",
+        type: 'highshelf',
         frequency: 3000,
         gain: 0,
       })
@@ -69,7 +69,7 @@ const App = () => {
     const dataArray = new Uint8Array(bufferLength);
     analyserNode.getByteFrequencyData(dataArray);
     const barWidth = width / bufferLength;
-    const canvasContext = viz.getContext("2d") as CanvasRenderingContext2D;
+    const canvasContext = viz.getContext('2d') as CanvasRenderingContext2D;
 
     cancelAnimationFrame(drawVisualizer as any);
     dataArray.forEach((item, index) => {
@@ -78,8 +78,8 @@ const App = () => {
 
       if (canvasContext) {
         const gradient = canvasContext.createLinearGradient(0, 0, height, 0);
-        gradient.addColorStop(1, "#222222");
-        gradient.addColorStop(0, "#000000");
+        gradient.addColorStop(1, '#222222');
+        gradient.addColorStop(0, '#000000');
         canvasContext.fillStyle = gradient;
         canvasContext.fillRect(x, height - y, barWidth, y);
       }
@@ -88,7 +88,7 @@ const App = () => {
 
   const assignContext = async () => {
     const intrument = await getIntrument();
-    if (context.state === "suspended") await context.resume();
+    if (context.state === 'suspended') await context.resume();
     const source = context.createMediaStreamSource(intrument);
     console.log(source);
     source
@@ -123,7 +123,7 @@ const App = () => {
 
   // http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
   const makeDistortionCurve = (amount: number) => {
-    const k = typeof amount === "number" ? amount : 50;
+    const k = typeof amount === 'number' ? amount : 50;
     const nSamples = 44100;
     const curve = new Float32Array(nSamples);
     const deg = Math.PI / 180;
@@ -142,10 +142,10 @@ const App = () => {
       overDriveOn = !overDriveEl.current.checked;
 
       if (overDriveOn === true) {
-        distortion.oversample = "4x";
+        distortion.oversample = '4x';
         distortion.curve = makeDistortionCurve(400);
       } else {
-        distortion.oversample = "none";
+        distortion.oversample = 'none';
         distortion.curve = new Float32Array();
       }
     }

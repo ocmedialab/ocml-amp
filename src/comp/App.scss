@@ -1,6 +1,6 @@
-@import "./vars";
-@import "./buttons";
-@import "./checkbox";
+@import './vars';
+@import './buttons';
+@import './checkbox';
 * {
   box-sizing: border-box;
 }
@@ -8,10 +8,10 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .ocml-amp {

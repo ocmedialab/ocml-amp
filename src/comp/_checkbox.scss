@@ -29,7 +29,7 @@
     border: 10px solid #000000;
     transform: translateY(35px);
     &::after {
-      content: "ON";
+      content: 'ON';
       position: absolute;
       display: none;
       color: #ffffff;

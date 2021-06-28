@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./UserGuide.scss";
+import React, { useState } from 'react';
+import './UserGuide.scss';
 
 const UserGuide = () => {
   const [openOrClose, setOpenOrClose] = useState(() => false);
@@ -9,7 +9,7 @@ const UserGuide = () => {
       <button type="button" className="btn-dark" onClick={toggle}>
         User Guide
       </button>
-      <div className={`ocml-amp--userguide ${openOrClose === false ? "closeModal" : "openModal"}`}>
+      <div className={`ocml-amp--userguide ${openOrClose === false ? 'closeModal' : 'openModal'}`}>
         <div className="modal">
           <div className="modal--header">
             <h1>User Guide</h1>
