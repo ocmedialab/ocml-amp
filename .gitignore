@@ -2,6 +2,7 @@
 
 .env
 /design
+/dist
 
 # dependencies
 /node_modules
