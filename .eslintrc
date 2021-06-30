@@ -23,6 +23,10 @@
     "no-console": "off",
     "no-param-reassign": "off",
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/prop-types": "off",
+    "react/button-has-type": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
     "import/extensions": [
       "off",
       "ignorePackages",

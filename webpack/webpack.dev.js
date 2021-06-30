@@ -1,24 +1,24 @@
 const paths = require('./paths');
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: paths.entryDev,
+  entry: {
+    ocml: paths.entryDev,
+  },
   devtool: 'inline-source-map',
   output: {
     path: paths.output,
-    filename: 'dev.js',
+    filename: '[name].[hash:8].js',
+    sourceMapFilename: '[name].[hash:8].map',
+    chunkFilename: '[id].[hash:8].js',
   },
   devServer: {
     contentBase: paths.contentBase,
     index: 'index.html',
-    port: 8081,
+    port: 8082,
     writeToDisk: true,
   },
   plugins: [
-    // new CleanWebpackPlugin({
-    // cleanOnceBeforeBuildPatterns: ['**/*', path.join(process.cwd(), 'extra/**/*')],
-    // }),
     new HtmlWebpackPlugin({
       title: 'OC Media Lab Amp',
       template: paths.template,

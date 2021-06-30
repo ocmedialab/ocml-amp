@@ -6,12 +6,13 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: paths.output,
-    library: 'ocml-amp',
-    libraryTarget: 'umd',
-    filename: 'ocml-amp.min.js',
+    libraryTarget: 'module',
   },
   plugins: [
     // https://developers.google.com/web/tools/workbox/guides/get-started
     // new WorkboxWebpackPlugin.GenerateSW(),
   ],
+  experiments: {
+    outputModule: true,
+  },
 };

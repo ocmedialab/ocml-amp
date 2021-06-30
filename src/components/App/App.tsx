@@ -1,7 +1,7 @@
 import React, { FC, StrictMode } from 'react';
 // https://javascript.plainenglish.io/write-react-functional-components-and-hooks-with-typescript-cd1539e2bc2a
 // import { Knob, Pointer, Value, Arc } from 'rc-knob';
-// import UserManual from '../UserManual';
+import UserManual from '../UserManual/UserManual';
 // import './App.scss';
 // import amp from '../img/amp-bg.png';
 // const timeConstant = 0;
@@ -152,9 +152,7 @@ const App: FC = () => {
 
   return (
     <StrictMode>
-      <div>testing</div>
-      <div>more test</div>
-      {/* <UserGuide /> */}
+      <UserManual />
       {/* <div className="amp--wrap">
         <div className="ocml-amp--controls">
           <div className="ocml-amp--controls--wrap">

@@ -1,5 +1,6 @@
 const paths = require('./paths');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   module: {
@@ -24,7 +25,7 @@ module.exports = {
       //   },
       // },
       {
-        test: /\.(js|.jsx)$/,
+        test: /\.(js)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -61,6 +62,7 @@ module.exports = {
         files: paths.eslintGlob,
       },
     }),
+    new CleanWebpackPlugin(),
   ],
   stats: {
     errorDetails: true,
