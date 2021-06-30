@@ -21,6 +21,8 @@ const closeModal = keyframes`
 `;
 
 export default styled.div`
+  left: 0;
+  top: 0;
   position: fixed;
   width: 100vw;
   height: 100vh;

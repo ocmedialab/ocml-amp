@@ -5,14 +5,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   module: {
     rules: [
-      // {
-      //   test: /\.(png|jpg)$/,
-      //   use: ['file-loader'],
-      // },
-      // {
-      //   test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-      //   type: 'asset',
-      // },
+      {
+        test: /\.png/,
+        type: 'asset/inline',
+      },
       {
         test: /\.html$/,
         loader: 'html-loader',

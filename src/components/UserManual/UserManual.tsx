@@ -10,13 +10,12 @@ const UserManual: FC = () => {
       <Btn primary handleClick={toggle}>
         User Guide
       </Btn>
+      {/* Todo: use react portal later */}
       <UserManualModal className={open ? 'open' : ''}>
         <div className="modal">
           <div className="modal--header">
             <h1>User Guide</h1>
-            <button type="button" className="btn-light" onClick={toggle}>
-              X
-            </button>
+            <Btn handleClick={toggle}>X</Btn>
           </div>
           <div className="modal--body">
             <ol>

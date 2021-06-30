@@ -2,8 +2,9 @@ import React, { FC, StrictMode } from 'react';
 // https://javascript.plainenglish.io/write-react-functional-components-and-hooks-with-typescript-cd1539e2bc2a
 // import { Knob, Pointer, Value, Arc } from 'rc-knob';
 import UserManual from '../UserManual/UserManual';
-// import './App.scss';
-// import amp from '../img/amp-bg.png';
+import Amp from '../Amp/Amp';
+import AppWrap from './App.styles';
+
 // const timeConstant = 0;
 
 const App: FC = () => {
@@ -152,9 +153,10 @@ const App: FC = () => {
 
   return (
     <StrictMode>
-      <UserManual />
-      {/* <div className="amp--wrap">
-        <div className="ocml-amp--controls">
+      <AppWrap>
+        <UserManual />
+        <Amp />
+        {/* <div className="ocml-amp--controls">
           <div className="ocml-amp--controls--wrap">
             <div className="ocml-amp--controls--label">Volume</div>
             <Knob
@@ -240,8 +242,8 @@ const App: FC = () => {
         <div className="ocml-amp--speaker">
           <img src={amp} className="ocml-amp--bg" alt="amp" />
           <canvas className="ocml-amp--viz" ref={visualizer} />
-        </div>
-      </div> */}
+        </div> */}
+      </AppWrap>
     </StrictMode>
   );
 };

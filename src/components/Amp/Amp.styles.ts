@@ -1,32 +1,12 @@
-@import './vars';
-@import './buttons';
-@import './checkbox';
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', sans-serif;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+import styled from 'styled-components';
 
-.ocml-amp {
+export default styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-items: center;
-
-  &--speaker {
-    width: 100%;
-    max-width: 100%;
-    position: relative;
-  }
 
   &--controls {
     display: grid;
@@ -51,20 +31,4 @@ code {
       user-select: none;
     }
   }
-
-  &--bg {
-    display: block;
-    max-width: 100%;
-  }
-
-  &--viz {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-    padding: 92px;
-  }
-}
+`;
