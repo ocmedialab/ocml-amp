@@ -2,13 +2,13 @@ import React, { FC, MutableRefObject } from 'react';
 import { CabinetBase, CabinetBg, Viz } from './Cabinet.styles';
 import orangeAmp from '../../assets/img/amp-bg.png';
 
-export enum CabinetType {
+enum CabinetType {
   one = 1,
   two = 2,
   three = 3,
 }
 
-export interface CabinetProps {
+interface CabinetProps {
   cabinetType: number;
   visualizer: MutableRefObject<HTMLCanvasElement | null>;
 }

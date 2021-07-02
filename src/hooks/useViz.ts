@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { ResizeViz, UseVizHook } from '../../types/ocml-amp';
 
 const getIntrument = () => {
   return navigator.mediaDevices.getUserMedia({
@@ -10,18 +10,6 @@ const getIntrument = () => {
     },
   });
 };
-
-type UseVizHook = (
-  context: AudioContext,
-  distortion: WaveShaperNode,
-  bassEQ: BiquadFilterNode,
-  midE: BiquadFilterNode,
-  trebleEQ: BiquadFilterNode,
-  gainNode: GainNode,
-  analyserNode: AnalyserNode,
-  visualizer: MutableRefObject<HTMLCanvasElement | null>,
-  bufferLength: number
-) => [() => Promise<void>];
 
 const useViz: UseVizHook = (
   context,
@@ -50,8 +38,7 @@ const useViz: UseVizHook = (
     drawVisualizer();
   };
 
-  const resize = () => {
-    const viz = visualizer.current;
+  const resize: ResizeViz = (viz) => {
     if (viz != null) {
       viz.width = viz.clientWidth * window.devicePixelRatio;
       viz.height = viz.clientHeight * window.devicePixelRatio;
@@ -59,20 +46,17 @@ const useViz: UseVizHook = (
   };
 
   function drawVisualizer() {
-    resize();
-    const myReq: number = requestAnimationFrame(drawVisualizer);
     const viz = visualizer.current as HTMLCanvasElement;
+    resize(viz);
+    requestAnimationFrame(drawVisualizer);
     const { width, height } = viz;
     const dataArray = new Uint8Array(bufferLength);
     analyserNode.getByteFrequencyData(dataArray);
     const barWidth = width / bufferLength;
     const canvasContext = viz.getContext('2d') as CanvasRenderingContext2D;
-
-    cancelAnimationFrame(myReq);
     dataArray.forEach((item, index) => {
       const y = ((item / 170) * height) / 2;
       const x = barWidth * index;
-
       if (canvasContext) {
         const gradient = canvasContext.createLinearGradient(0, 0, height, 0);
         gradient.addColorStop(1, '#222222');

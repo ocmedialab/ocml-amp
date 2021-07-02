@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
+// import { Knob as RcKnob, Pointer, Value, Arc } from 'rc-knob';
 import { Knob as RcKnob, Pointer, Value, Arc } from 'rc-knob';
-// https://javascript.plainenglish.io/write-react-functional-components-and-hooks-with-typescript-cd1539e2bc2a
 import { KnobWrap, Title } from './Knob.styles';
 
 interface KnobProps {
@@ -8,7 +8,7 @@ interface KnobProps {
   onChange: (val: number) => void;
 }
 
-const Knob: FC<KnobProps> = ({ onChange, title }) => {
+const Knob: FC<KnobProps> = ({ title, onChange }) => {
   return (
     <KnobWrap>
       <Title>{title}</Title>

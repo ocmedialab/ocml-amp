@@ -2,7 +2,7 @@ type UseDistortionHook = () => [Float32Array, Float32Array];
 
 const useDistortion: UseDistortionHook = () => {
   // http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
-  const noCurve = new Float32Array();
+  const noCurve = new Float32Array(0);
 
   const k = 400;
   const nSamples = 44100;

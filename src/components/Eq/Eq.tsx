@@ -99,7 +99,7 @@ const Eq: FC<EqProps> = ({ visualizer }) => {
       <Knob title="Bass" onChange={handleBass} />
       <Knob title="Mid" onChange={handleMid} />
       <Knob title="Treble" onChange={handleTreble} />
-      <CheckBox ref={overDriveEl} onClick={overDriveClick} checked={overDrive} />
+      <CheckBox overDriveEl={overDriveEl} onClick={overDriveClick} checked={overDrive} />
     </EqWrap>
   );
 };
