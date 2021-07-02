@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const KnobWrap = styled.div`
-  border: 2px solid red;
+  & text[text-anchor='middle'] {
+    fill: white;
+    font-size: 1.75rem;
+    font-weight: 900;
+  }
 `;
 
 export const Title = styled.div`
@@ -9,7 +13,7 @@ export const Title = styled.div`
   display: block;
   font-weight: 900;
   color: #000000;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
   text-transform: uppercase;
   user-select: none;
 `;

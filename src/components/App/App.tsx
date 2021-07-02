@@ -6,8 +6,8 @@ import AppWrap from './App.styles';
 const App: FC = () => {
   return (
     <AppWrap>
-      <UserManual />
       <Amp />
+      <UserManual />
     </AppWrap>
   );
 };

@@ -21,7 +21,9 @@ const Cabinet: FC<CabinetProps> = ({ cabinetType, visualizer }) => {
   return (
     <CabinetBase>
       <CabinetBg src={imgAttr?.src} alt={imgAttr?.alt} />
-      <Viz ref={visualizer} />
+      <div className="viz-wrap">
+        <Viz ref={visualizer} />
+      </div>
     </CabinetBase>
   );
 };

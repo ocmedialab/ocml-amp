@@ -1,6 +1,6 @@
 import { ResizeViz, UseVizHook } from '../../types/ocml-amp';
 
-const getIntrument = () => {
+const getAudio = () => {
   return navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: false,
@@ -23,10 +23,9 @@ const useViz: UseVizHook = (
   bufferLength
 ) => {
   const assignContext = async () => {
-    const intrument = await getIntrument();
+    const audio = await getAudio();
     if (context.state === 'suspended') await context.resume();
-    const source = context.createMediaStreamSource(intrument);
-    console.log(source);
+    const source = context.createMediaStreamSource(audio);
     source
       .connect(distortion)
       .connect(bassEQ)
