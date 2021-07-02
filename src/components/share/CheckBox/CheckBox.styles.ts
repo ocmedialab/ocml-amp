@@ -1,4 +1,16 @@
-.checkbox--wrap {
+import styled from 'styled-components';
+
+export const Title = styled.div`
+  text-align: center;
+  display: block;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  user-select: none;
+`;
+
+export const CheckBoxWrap = styled.div`
   text-align: center;
   position: relative;
   .checkbox {
@@ -42,4 +54,4 @@
   &:hover .checkmark {
     background-color: #fdfdfd;
   }
-}
+`;
