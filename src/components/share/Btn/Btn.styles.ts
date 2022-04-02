@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { BtnVariation } from './Btn';
 
-const baseStyles = css<{ variation: BtnVariation }>`
+const baseStyles = css<{ variation: Record<string, boolean> }>`
   appearance: none;
   background-color: transparent;
   cursor: pointer;
@@ -18,8 +17,8 @@ const baseStyles = css<{ variation: BtnVariation }>`
   z-index: 1;
   transition: color 150ms ease-in-out;
   font-weight: 900;
-  border-color: ${(props) => (props.variation === BtnVariation.primary ? '#000000' : 'red')};
-  color: ${(props) => (props.variation === BtnVariation.primary ? '#000000' : 'red')};
+  border-color: ${({ variation }) => (variation.primary ? '#000000' : 'red')};
+  color: ${({ variation }) => (variation.primary ? '#000000' : 'red')};
 
   &:after {
     content: '';
@@ -30,8 +29,8 @@ const baseStyles = css<{ variation: BtnVariation }>`
     transform: translateX(-50%);
     width: 0;
     height: 100%;
-    border-color: ${(props) => (props.variation === BtnVariation.primary ? '#000000' : 'red')};
-    border-color: ${(props) => (props.variation === BtnVariation.primary ? '#000000' : 'red')};
+    border-color: ${({ variation }) => (variation.primary ? '#000000' : 'red')};
+    border-color: ${({ variation }) => (variation.primary ? '#000000' : 'red')};
     z-index: -1;
     transition: width 150ms ease-in-out;
   }

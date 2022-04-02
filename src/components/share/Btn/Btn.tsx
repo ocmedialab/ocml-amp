@@ -1,20 +1,23 @@
 import React, { FC, ReactChild, MouseEvent } from 'react';
 import BtnBase from './Btn.styles';
 
-export enum BtnVariation {
-  primary = 1,
-  secondary = 2,
-}
-
 interface BtnProps {
   handleClick: (event: MouseEvent) => void;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
   primary?: boolean;
+  secondary?: boolean;
   children: ReactChild;
 }
 
-const Btn: FC<BtnProps> = ({ handleClick, type = 'button', className, primary, children }) => {
+const Btn: FC<BtnProps> = ({
+  handleClick,
+  type = 'button',
+  className = '',
+  primary = true,
+  secondary = false,
+  children,
+}) => {
   const onClick = (event: MouseEvent) => {
     if (handleClick) {
       handleClick(event);
@@ -23,10 +26,10 @@ const Btn: FC<BtnProps> = ({ handleClick, type = 'button', className, primary, c
 
   return (
     <BtnBase
-      variation={primary ? BtnVariation.primary : BtnVariation.secondary}
+      variation={{ primary, secondary }}
       onClick={(event) => onClick(event)}
       type={type}
-      className={className}
+      className={`ocml-amp-btn ${className}`}
     >
       {children}
     </BtnBase>

@@ -2,7 +2,7 @@
   "parser": "@typescript-eslint/parser",
   "env": {
     "commonjs": true,
-    "es6": true,
+    "es2021": true,
     "browser": true,
     "jest": true
   },
@@ -23,7 +23,8 @@
     "no-console": "off",
     "no-param-reassign": "off",
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-    "react/prop-types": "off",
+    "react/prop-types": "off", //no prop-types w/ typescript
+    "react/require-default-props": "off", //no prop-types w/ typescript
     "react/button-has-type": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
