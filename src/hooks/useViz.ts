@@ -37,7 +37,7 @@ const useViz: UseVizHook = (
     drawVisualizer();
   };
 
-  const resize: ResizeViz = (viz) => {
+  const resize: ResizeViz = viz => {
     if (viz != null) {
       viz.width = viz.clientWidth * window.devicePixelRatio;
       viz.height = viz.clientHeight * window.devicePixelRatio;

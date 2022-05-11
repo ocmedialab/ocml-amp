@@ -14,4 +14,4 @@ type UseVizHook = (
   bufferLength: number
 ) => [() => Promise<void>];
 
-type OcmlAmp = FC;
+type Amp = FC;
