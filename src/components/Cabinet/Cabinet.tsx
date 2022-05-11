@@ -19,7 +19,7 @@ interface CabinetProps {
 //   [CabinetType.one, { src: orangeAmp, alt: 'OC Media Amp - Orange' }],
 // ]);
 
-const Cabinet: FC<CabinetProps> = ({ visualizer }) => {
+const Cabinet: FC<CabinetProps> = ({ visualizer }: CabinetProps) => {
   // const imgAttr = cabinet.get(cabinetType);
 
   return (

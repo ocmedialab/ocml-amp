@@ -38,6 +38,8 @@ const useViz: UseVizHook = (
   };
 
   const resize: ResizeViz = viz => {
+    console.log('width', viz);
+
     if (viz != null) {
       viz.width = viz.clientWidth * window.devicePixelRatio;
       viz.height = viz.clientHeight * window.devicePixelRatio;

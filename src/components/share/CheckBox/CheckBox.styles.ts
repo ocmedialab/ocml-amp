@@ -4,7 +4,7 @@ export const Title = styled.div`
   text-align: center;
   display: block;
   font-weight: 900;
-  color: #000000;
+  color: #ffffff;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   user-select: none;
@@ -37,7 +37,7 @@ export const CheckBoxWrap = styled.div`
     margin: auto;
     height: 80px;
     width: 80px;
-    background-color: #ffffff;
+    background-color: #202020;
     border: 10px solid #000000;
     transform: translateY(35px);
     &::after {

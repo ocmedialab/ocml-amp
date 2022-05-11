@@ -11,13 +11,15 @@ interface EqProps {
   visualizer: MutableRefObject<HTMLCanvasElement | null>;
 }
 
-const Eq: FC<EqProps> = ({ visualizer }) => {
+const Eq: FC<EqProps> = ({ visualizer }: EqProps) => {
   const overDriveEl = useRef<null | HTMLInputElement>(null);
   const [context] = useState(new AudioContext());
   const [gainNode] = useState(new GainNode(context, { gain: 0 }));
   const [distortion] = useState(() => context.createWaveShaper());
   const [overDrive, setOverDrive] = useState(() => false);
-  const [analyserNode] = useState(() => new AnalyserNode(context, { fftSize: 256 }));
+  const [analyserNode] = useState(
+    () => new AnalyserNode(context, { fftSize: 256 })
+  );
   const [bufferLength] = useState(() => analyserNode.frequencyBinCount);
   const [curve, noCurve] = useDistortion();
   const [bassEQ] = useState(
@@ -89,7 +91,11 @@ const Eq: FC<EqProps> = ({ visualizer }) => {
   };
 
   const handleTreble = (treble: number) => {
-    trebleEQ.gain.setTargetAtTime(treble * 0.1, context.currentTime, timeConstant);
+    trebleEQ.gain.setTargetAtTime(
+      treble * 0.1,
+      context.currentTime,
+      timeConstant
+    );
     assignContext();
   };
 
@@ -99,7 +105,11 @@ const Eq: FC<EqProps> = ({ visualizer }) => {
       <Knob title="Bass" onChange={handleBass} />
       <Knob title="Mid" onChange={handleMid} />
       <Knob title="Treble" onChange={handleTreble} />
-      <CheckBox overDriveEl={overDriveEl} onClick={overDriveClick} checked={overDrive} />
+      <CheckBox
+        overDriveEl={overDriveEl}
+        onClick={overDriveClick}
+        checked={overDrive}
+      />
     </EqWrap>
   );
 };

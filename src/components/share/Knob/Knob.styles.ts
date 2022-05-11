@@ -12,7 +12,7 @@ export const Title = styled.div`
   text-align: center;
   display: block;
   font-weight: 900;
-  color: #000000;
+  color: #ffffff;
   margin-bottom: 0.35rem;
   text-transform: uppercase;
   user-select: none;
