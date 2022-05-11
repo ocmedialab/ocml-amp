@@ -26,6 +26,7 @@
     "react/prop-types": "off", //no prop-types w/ typescript
     "react/require-default-props": "off", //no prop-types w/ typescript
     "react/button-has-type": "off",
+    "react/function-component-definition": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "import/extensions": [
