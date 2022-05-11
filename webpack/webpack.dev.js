@@ -1,10 +1,10 @@
-const paths = require('./paths');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('./paths');
 
 module.exports = {
-  entry: {
-    ocml: paths.entryDev,
-  },
+  entry: paths.entryDev,
   devtool: 'inline-source-map',
   output: {
     path: paths.output,
@@ -13,10 +13,18 @@ module.exports = {
     chunkFilename: '[id].[hash:8].js',
   },
   devServer: {
-    contentBase: paths.contentBase,
-    index: 'index.html',
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    // contentBase: paths.contentBase,
     port: 8082,
-    writeToDisk: true,
+    devMiddleware: {
+      // index: true,
+      // mimeTypes: { phtml: 'text/html' },
+      // publicPath: '/publicPathForDevServe',
+      // serverSideRender: true,
+      writeToDisk: true,
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

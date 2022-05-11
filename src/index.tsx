@@ -1,5 +1,14 @@
-import React from 'react';
-import { render } from 'react-dom';
-import App from './components/App/App';
+import React, { StrictMode } from 'react';
+import { createRoot, Root } from 'react-dom/client';
+import OcmlAmp from './components/OcmlAmp/OcmlAmp';
 
-render(<App />, document.getElementById('ocml-amp'));
+const el = document.getElementById('ocml-amp');
+
+if (el !== null) {
+  const root = createRoot(el) as Root;
+  root.render(
+    <StrictMode>
+      <OcmlAmp />
+    </StrictMode>
+  );
+}

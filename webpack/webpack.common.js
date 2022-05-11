@@ -1,6 +1,14 @@
-const paths = require('./paths');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const paths = require('./paths');
+
+const cleanOptions = {
+  verbose: true,
+  cleanOnceBeforeBuildPatterns: [paths.output],
+};
 
 module.exports = {
   module: {
@@ -53,12 +61,12 @@ module.exports = {
   },
   plugins: [
     // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin
-    new ForkTsCheckerWebpackPlugin({
-      eslint: {
-        files: paths.eslintGlob,
-      },
-    }),
-    new CleanWebpackPlugin(),
+    // new ForkTsCheckerWebpackPlugin({
+    //   eslint: {
+    //     files: paths.eslintGlob,
+    //   },
+    // }),
+    new CleanWebpackPlugin(cleanOptions),
   ],
   stats: {
     errorDetails: true,

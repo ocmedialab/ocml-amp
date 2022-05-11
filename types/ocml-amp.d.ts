@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { FC, MutableRefObject } from 'react';
 
 type ResizeViz = (viz: HTMLCanvasElement | null) => void;
 
@@ -13,3 +13,5 @@ type UseVizHook = (
   visualizer: MutableRefObject<HTMLCanvasElement | null>,
   bufferLength: number
 ) => [() => Promise<void>];
+
+type OcmlAmp = FC;
