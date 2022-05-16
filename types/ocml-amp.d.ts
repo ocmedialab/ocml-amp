@@ -10,7 +10,7 @@ type UseVizHook = (
   trebleEQ: BiquadFilterNode,
   gainNode: GainNode,
   analyserNode: AnalyserNode,
-  visualizer: MutableRefObject<HTMLCanvasElement | null>,
+  // visualizer: MutableRefObject<HTMLCanvasElement | null>,
   bufferLength: number
 ) => [() => Promise<void>];
 

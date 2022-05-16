@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import AmpContext from '../context/AmpContext';
 import { ResizeViz, UseVizHook } from '../../types/ocml-amp';
 
 const getAudio = () => {
@@ -19,9 +21,9 @@ const useViz: UseVizHook = (
   trebleEQ,
   gainNode,
   analyserNode,
-  visualizer,
   bufferLength
 ) => {
+  const { canvas } = useContext(AmpContext);
   const assignContext = async () => {
     const audio = await getAudio();
     if (context.state === 'suspended') await context.resume();
@@ -38,23 +40,20 @@ const useViz: UseVizHook = (
   };
 
   const resize: ResizeViz = viz => {
-    console.log('width', viz);
-
-    if (viz != null) {
-      viz.width = viz.clientWidth * window.devicePixelRatio;
-      viz.height = viz.clientHeight * window.devicePixelRatio;
-    }
+    if (!viz) return;
+    viz.width = viz.clientWidth * window.devicePixelRatio;
+    viz.height = viz.clientHeight * window.devicePixelRatio;
   };
 
   function drawVisualizer() {
-    const viz = visualizer.current as HTMLCanvasElement;
+    const viz = canvas.current;
     resize(viz);
     requestAnimationFrame(drawVisualizer);
     const { width, height } = viz;
     const dataArray = new Uint8Array(bufferLength);
     analyserNode.getByteFrequencyData(dataArray);
     const barWidth = width / bufferLength;
-    const canvasContext = viz.getContext('2d') as CanvasRenderingContext2D;
+    const canvasContext = viz.getContext('2d');
     dataArray.forEach((item, index) => {
       const y = ((item / 170) * height) / 2;
       const x = barWidth * index;

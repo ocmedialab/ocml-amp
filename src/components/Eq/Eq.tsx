@@ -1,5 +1,4 @@
-import React, { MutableRefObject, FC, useRef, useState } from 'react';
-// https://javascript.plainenglish.io/write-react-functional-components-and-hooks-with-typescript-cd1539e2bc2a
+import React, { FC, useRef, useState } from 'react';
 import Knob from '../share/Knob/Knob';
 import CheckBox from '../share/CheckBox/CheckBox';
 import { useViz, useDistortion } from '../../hooks';
@@ -7,11 +6,9 @@ import EqWrap from './Eq.styles';
 
 const timeConstant = 0;
 
-interface EqProps {
-  visualizer: MutableRefObject<HTMLCanvasElement | null>;
-}
+interface EqProps {}
 
-const Eq: FC<EqProps> = ({ visualizer }: EqProps) => {
+const Eq: FC<EqProps> = () => {
   const overDriveEl = useRef<null | HTMLInputElement>(null);
   const [context] = useState(new AudioContext());
   const [gainNode] = useState(new GainNode(context, { gain: 0 }));
@@ -71,7 +68,6 @@ const Eq: FC<EqProps> = ({ visualizer }: EqProps) => {
     trebleEQ,
     gainNode,
     analyserNode,
-    visualizer,
     bufferLength
   );
 

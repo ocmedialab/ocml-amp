@@ -10,20 +10,6 @@ export const CabinetBase = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    transform: translate(0px, -140px);
+    /* transform: translate(0px, -140px); */
   }
-`;
-
-export const CabinetBg = styled.img`
-  display: block;
-  max-width: 100%;
-  height: 100%;
-`;
-
-export const Viz = styled.canvas`
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 `;
