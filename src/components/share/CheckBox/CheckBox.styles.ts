@@ -1,15 +1,5 @@
 import styled from 'styled-components';
 
-export const Title = styled.div`
-  text-align: center;
-  display: block;
-  font-weight: 900;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  user-select: none;
-`;
-
 export const CheckBoxWrap = styled.div`
   text-align: center;
   position: relative;

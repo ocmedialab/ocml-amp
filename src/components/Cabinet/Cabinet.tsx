@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Canvas from '../Canvas/Canvas';
+import Logo from '../share/Logo/Logo';
 import { CabinetBase } from './Cabinet.styles';
 
 // enum CabinetType {
@@ -19,9 +20,14 @@ interface CabinetProps {
 const Cabinet: FC<CabinetProps> = () => {
   return (
     <CabinetBase>
-      <div className="viz-wrap">
-        <Canvas />
-      </div>
+      <Canvas />
+      <Logo
+        className={'viz-wrap--logo'}
+        animateStroke={false}
+        stroke={'#ffffff'}
+        strokeWidth={'3'}
+        fill={'transparent'}
+      />
     </CabinetBase>
   );
 };

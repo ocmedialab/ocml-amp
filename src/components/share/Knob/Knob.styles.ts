@@ -12,6 +12,7 @@ export const Title = styled.div`
   text-align: center;
   display: block;
   font-weight: 900;
+  font-size: 0.9rem;
   color: #ffffff;
   margin-bottom: 0.35rem;
   text-transform: uppercase;
