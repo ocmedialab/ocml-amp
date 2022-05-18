@@ -12,5 +12,3 @@ type UseVizHook = (
   analyserNode: AnalyserNode,
   bufferLength: number
 ) => [() => void];
-
-type OcmlAmp = FC;
