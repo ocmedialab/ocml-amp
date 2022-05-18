@@ -8,5 +8,5 @@ export default styled.div`
   background-color: #545358;
   border-bottom: 1rem solid #797572;
   padding: 10px 20px;
-  height: ${eq.desktopHeight};
+  height: ${eq.desktopHeight}px;
 `;

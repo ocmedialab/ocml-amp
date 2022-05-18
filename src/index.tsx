@@ -1,13 +1,13 @@
 import React from 'react';
-import { Amp } from '../types/ocml-amp';
+import { OcmlAmp as AmpT } from '../types/';
 import UserManual from './components/UserManual/UserManual';
-import { default as AmpBase } from './components/Amp/Amp';
+import Amp from './components/Amp/Amp';
 import OcmlAmpStyles from './index.styles';
 
-export const OcmlAmp: Amp = () => {
+export const OcmlAmp: AmpT = () => {
   return (
-    <OcmlAmpStyles>
-      <AmpBase />
+    <OcmlAmpStyles className="ocml-amp">
+      <Amp />
       <UserManual />
     </OcmlAmpStyles>
   );

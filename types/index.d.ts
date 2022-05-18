@@ -1,6 +1,6 @@
 import { FC, MutableRefObject } from 'react';
 
-type ResizeViz = (viz: HTMLCanvasElement | null) => void;
+type ResizeViz = (viz: HTMLCanvasElement) => void;
 
 type UseVizHook = (
   context: AudioContext,
@@ -10,8 +10,7 @@ type UseVizHook = (
   trebleEQ: BiquadFilterNode,
   gainNode: GainNode,
   analyserNode: AnalyserNode,
-  // visualizer: MutableRefObject<HTMLCanvasElement | null>,
   bufferLength: number
-) => [() => Promise<void>];
+) => [() => void];
 
-type Amp = FC;
+type OcmlAmp = FC;

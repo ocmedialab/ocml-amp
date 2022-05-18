@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const CabinetBase = styled.div`
-  position: absolute;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  height: 100%;
-  width: 100%;
+  position: relative;
+  display: block;
+  border: 2px solid red;
+  height: 317px;
   .viz-wrap--logo {
     max-width: 175px;
   }

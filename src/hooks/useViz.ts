@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import AmpContext from '../context/AmpContext';
-import { ResizeViz, UseVizHook } from '../../types/ocml-amp';
+import { ResizeViz, UseVizHook } from '../../types';
 
 const getAudio = () => {
   return navigator.mediaDevices.getUserMedia({
@@ -40,7 +40,6 @@ const useViz: UseVizHook = (
   };
 
   const resize: ResizeViz = viz => {
-    if (!viz) return;
     viz.width = viz.clientWidth * window.devicePixelRatio;
     viz.height = viz.clientHeight * window.devicePixelRatio;
   };

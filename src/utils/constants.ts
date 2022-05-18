@@ -1,3 +1,3 @@
 export const eq = {
-  desktopHeight: '155px',
+  desktopHeight: 155,
 };
