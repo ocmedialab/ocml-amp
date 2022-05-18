@@ -22,7 +22,7 @@ const Cabinet: FC<CabinetProps> = () => {
     <CabinetBase>
       <Canvas />
       <Logo
-        className={'viz-wrap--logo'}
+        className={'ocml--logo'}
         animateStroke={false}
         stroke={'#ffffff'}
         strokeWidth={'3'}
