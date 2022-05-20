@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "rc-knob": "^1.0.1",
+    "react-device-detect": "^2.2.2",
     "styled-components": "^5.3.5"
   }
 }

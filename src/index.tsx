@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+import { isChrome } from 'react-device-detect';
 import Amp from './components/Amp/Amp';
 import UserManual from './components/UserManual/UserManual';
+import ChromeOnly from './components/ChromeOnly/ChromeOnly';
 import OcmlAmpStyles from './index.styles';
 
 interface OcmlAmp {
@@ -10,8 +12,14 @@ interface OcmlAmp {
 export const OcmlAmp: FC<OcmlAmp> = ({ withManual }) => {
   return (
     <OcmlAmpStyles className="ocml-amp">
-      <Amp />
-      {withManual ? <UserManual /> : null}
+      {isChrome ? (
+        <>
+          <Amp />
+          {withManual ? <UserManual /> : null}
+        </>
+      ) : (
+        <ChromeOnly />
+      )}
     </OcmlAmpStyles>
   );
 };
