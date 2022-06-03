@@ -6,7 +6,7 @@ import ChromeOnly from './components/ChromeOnly/ChromeOnly';
 import OcmlAmpStyles from './index.styles';
 
 interface OcmlAmp {
-  withManual: boolean;
+  withManual?: boolean;
 }
 
 export const OcmlAmp: FC<OcmlAmp> = ({ withManual }) => {
