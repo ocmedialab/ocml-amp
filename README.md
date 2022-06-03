@@ -162,3 +162,5 @@ An alternative to fixing this problem would be to remove aliases altogether and 
 ## Notes
 
 1. maybe use this later for publishing [np](https://github.com/sindresorhus/np)
+
+2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect)
