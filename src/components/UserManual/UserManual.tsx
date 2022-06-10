@@ -1,17 +1,30 @@
 import React, { useState, FC } from 'react';
 import Btn from '../share/Btn/Btn';
-import UserManualModal from './UserManual.styles';
+import { UserManualStyles, UserManualWrapStyles } from './UserManual.styles';
 
-const UserManual: FC = () => {
+export enum UserManualPos {
+  topLeft = 'tl',
+  topMiddle = 'tm',
+  topRight = 'tr',
+  bottomLeft = 'bl',
+  bottomMiddle = 'bm',
+  bottomRight = 'br',
+}
+
+export interface UserManualProps {
+  pos: UserManualPos;
+}
+
+const UserManual: FC<UserManualProps> = ({ pos }) => {
+  console.log('pos', pos);
   const [open, setOpen] = useState<boolean>(false);
   const toggle = () => setOpen(() => !open);
   return (
-    <>
+    <UserManualWrapStyles pos={pos}>
       <Btn primary handleClick={toggle}>
         User Guide
       </Btn>
-      {/* Todo: use react portal later */}
-      <UserManualModal className={open ? 'open' : ''}>
+      <UserManualStyles className={open ? 'open' : ''}>
         <div className="modal">
           <div className="modal--header">
             <h1>User Guide</h1>
@@ -36,8 +49,8 @@ const UserManual: FC = () => {
             </ol>
           </div>
         </div>
-      </UserManualModal>
-    </>
+      </UserManualStyles>
+    </UserManualWrapStyles>
   );
 };
 

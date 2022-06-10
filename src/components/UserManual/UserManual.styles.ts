@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { UserManualPos } from './UserManual';
 
 const openModal = keyframes`
   from {
@@ -20,7 +21,17 @@ const closeModal = keyframes`
   }
 `;
 
-export default styled.div`
+interface UserManualWrapStylesProps {
+  pos: UserManualPos;
+}
+
+export const UserManualWrapStyles = styled.div<UserManualWrapStylesProps>`
+  & > button {
+    margin-bottom: 1rem;
+  }
+`;
+
+export const UserManualStyles = styled.div`
   left: 0;
   top: 0;
   position: fixed;
