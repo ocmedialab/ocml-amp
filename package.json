@@ -1,4 +1,17 @@
 {
+  "name": "ocml-amp",
+  "author": "Marcus Badillo",
+  "module": "dist/ocml-amp.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/ocml-amp.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/ocml-amp.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -20,10 +33,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -35,19 +44,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "ocml-amp",
-  "author": "Marcus Badillo",
-  "module": "dist/ocml-amp.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/ocml-amp.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/ocml-amp.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
     "@size-limit/webpack": "^7.0.8",
@@ -70,5 +66,9 @@
     "rc-knob": "^1.0.1",
     "react-device-detect": "^2.2.2",
     "styled-components": "^5.3.5"
+  },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   }
 }
