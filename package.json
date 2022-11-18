@@ -1,5 +1,6 @@
 {
   "name": "ocml-amp",
+  "description": "A web amp.",
   "author": "Marcus Badillo",
   "module": "dist/ocml-amp.esm.js",
   "size-limit": [
@@ -21,7 +22,8 @@
     "src"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=10",
+    "npm": "7"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -45,30 +47,32 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.8",
-    "@size-limit/webpack": "^7.0.8",
-    "@size-limit/webpack-why": "^7.0.8",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.0",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.3",
-    "@types/styled-components": "^5.1.25",
-    "husky": "^8.0.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "size-limit": "^7.0.8",
+    "@size-limit/preset-small-lib": "^8.1.0",
+    "@size-limit/webpack": "^8.1.0",
+    "@size-limit/webpack-why": "^8.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@types/styled-components": "^5.1.26",
+    "husky": "^8.0.2",
+    "react": "^18.2.0",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "size-limit": "^8.1.0",
+    "styled-components": "^5.3.6",
     "tsdx": "^0.14.1",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4"
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
-    "rc-knob": "^1.0.1",
-    "react-device-detect": "^2.2.2",
-    "styled-components": "^5.3.5"
+    "rc-knob": "^1.0.1"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.2.0",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6"
   }
 }

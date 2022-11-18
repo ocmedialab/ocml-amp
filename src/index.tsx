@@ -6,7 +6,7 @@ import ChromeOnly from './components/ChromeOnly/ChromeOnly';
 import { UserManualPos } from './components/UserManual/UserManual';
 import OcmlAmpStyles from './index.styles';
 
-interface OcmlAmp {
+export interface OcmlAmp {
   userManual?: boolean;
   userManualPos?: UserManualPos;
 }
