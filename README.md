@@ -1,4 +1,6 @@
-# TSDX React User Guide
+# OCML Amp
+
+<!-- # TSDX React User Guide
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
 
@@ -162,4 +164,4 @@ An alternative to fixing this problem would be to remove aliases altogether and 
 
 1. maybe use this later for publishing [np](https://github.com/sindresorhus/np)
 
-2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect)
+2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect) -->
