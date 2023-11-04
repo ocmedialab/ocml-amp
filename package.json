@@ -13,7 +13,7 @@
       "limit": "10 KB"
     }
   ],
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
