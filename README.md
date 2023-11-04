@@ -18,7 +18,7 @@ import { OcmlAmp } from 'ocml-amp';
 
 ## Local Development
 
-> Project is boilerplated with [https://tsdx.io](TSDX React) User Guide
+> Project is boilerplated with [https://tsdx.io](TSDX React)
 
 The recommended workflow is to run TSDX in one terminal:
 
