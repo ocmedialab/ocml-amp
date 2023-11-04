@@ -1,15 +1,24 @@
 # OCML Amp
 
-<!-- # TSDX React User Guide
+## Getting Started
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+Install package
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+```bash
+npm i ocml-amp
+```
 
-## Commands
+Add OCML Amp react component to your web project
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
+```js
+import { OcmlAmp } from 'ocml-amp';
+
+<OcmlAmp />;
+```
+
+## Local Development
+
+> Project is boilerplated with [https://tsdx.io](TSDX React) User Guide
 
 The recommended workflow is to run TSDX in one terminal:
 
@@ -164,4 +173,4 @@ An alternative to fixing this problem would be to remove aliases altogether and 
 
 1. maybe use this later for publishing [np](https://github.com/sindresorhus/np)
 
-2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect) -->
+2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect)
