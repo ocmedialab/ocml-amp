@@ -1,5 +1,7 @@
 # OCML Amp
 
+> Open-Source web-based amp used for guitars and vocals created with react & typescript
+
 ## Getting Started
 
 Install package
