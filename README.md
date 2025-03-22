@@ -1,4 +1,4 @@
-# OCML Amp
+# @ocml/amp
 
 > Open-Source web-based amp used for guitars and vocals created with react & typescript
 
@@ -7,13 +7,13 @@
 Install package
 
 ```bash
-npm i ocml-amp
+npm i @ocml/amp
 ```
 
 Add OCML Amp react component to your web project
 
 ```js
-import { OcmlAmp } from 'ocml-amp';
+import { OcmlAmp } from '@ocml/amp';
 
 <OcmlAmp />;
 ```
@@ -176,3 +176,11 @@ An alternative to fixing this problem would be to remove aliases altogether and 
 1. maybe use this later for publishing [np](https://github.com/sindresorhus/np)
 
 2. cross-browser stuff [react-device-detect](https://www.npmjs.com/package/react-device-detect)
+
+## Ownership and Contributions
+
+This project is maintained by Marcus Badillo, OC Media Lab and is licensed under the MIT License.
+
+We welcome contributions! If you'd like to contribute, please fork the repository, create a feature branch, and submit a pull request. All contributions will be reviewed and merged at the discretion of the project maintainers.
+
+By contributing, you agree to license your contributions under the MIT License.
