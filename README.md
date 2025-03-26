@@ -2,7 +2,7 @@
 
 > Open-Source web-based amp used for guitars and vocals created with react & typescript
 
-![The OC Media Lab Amp](./src/assets/img/github-preview.jpg)
+![The OC Media Lab Amp](https://live.staticflickr.com/65535/54412723658_57beb7a8b3_b.jpg)
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ import { OcmlAmp } from '@ocml/amp';
 
 ## Local Development
 
-Project is boilerplated with [https://tsdx.io](TSDX React).
+Project is boilerplated with [TSDX React](https://tsdx.io).
 
 The recommended workflow is to run TSDX in one terminal:
 
