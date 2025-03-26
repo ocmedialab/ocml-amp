@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
-import Cabinent from '../Cabinet/Cabinet';
+import AmpProvider from '../../providers/AmpProvider';
+import Cabinet from '../Cabinet/Cabinet';
 import Eq from '../Eq/Eq';
 import AmpWrap from './Amp.styles';
-import AmpProvider from '../../providers/AmpProvider';
 
 const Amp: FC = () => {
   return (
-    <AmpWrap>
-      <AmpProvider>
+    <AmpProvider>
+      <AmpWrap>
         <Eq />
-        <Cabinent />
-      </AmpProvider>
-    </AmpWrap>
+        <Cabinet />
+      </AmpWrap>
+    </AmpProvider>
   );
 };
 

@@ -1,47 +1,53 @@
 import styled from 'styled-components';
 
-export const CheckBoxWrap = styled.div`
-  text-align: center;
-  position: relative;
-  .checkbox {
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
-    cursor: pointer;
-    &:checked + .checkmark {
-      background-color: red;
-      &::after {
-        display: block;
-        font-weight: 900;
-        font-size: 30px;
-        text-align: center;
-      }
+export const CheckBox = styled.div`
+  height: 52px;
+  width: 52px;
+  background-color: rgb(85, 89, 92);
+  border: 6px solid rgb(24, 27, 28);
+  margin: auto;
+  transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1);
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(250, 156, 52);
+    &::after {
+      display: block;
     }
   }
-  .checkmark {
+
+  &::after {
+    transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1);
+    content: 'OFF';
     position: absolute;
-    top: 0;
+    display: none;
+    color: rgb(255, 255, 255);
     left: 0;
+    top: 0;
+    bottom: 0;
     right: 0;
     margin: auto;
-    height: 80px;
-    width: 80px;
-    background-color: #202020;
-    border: 10px solid #000000;
-    transform: translateY(35px);
-    &::after {
-      content: 'ON';
-      position: absolute;
-      display: none;
-      color: #ffffff;
-      left: 0;
-      right: 0;
-      margin: auto;
-      padding-top: 13px;
-    }
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
   }
-  &:hover .checkmark {
-    background-color: #fdfdfd;
+`;
+
+export const CheckBoxWrap = styled.div`
+  padding: 10px;
+  background-color: #2c2d2f;
+  height: 149px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: flex-end;
+
+  &.on {
+    ${CheckBox} {
+      background-color: rgb(250, 156, 52);
+      &::after {
+        content: 'ON';
+        display: block;
+      }
+    }
   }
 `;

@@ -1,24 +1,20 @@
-import React, { FC, useRef, useState } from 'react';
-import Knob from '../share/Knob/Knob';
+import React, { useCallback, useState } from 'react';
+import useAudio from '../../hooks/useAudio';
+import useDistortion from '../../hooks/useDistortion';
+import { EqStyled } from '../Eq/Eq.styles';
 import CheckBox from '../share/CheckBox/CheckBox';
-import { useViz, useDistortion } from '../../hooks';
-import EqWrap from './Eq.styles';
+import Knob from '../share/Knob/Knob';
 
-const timeConstant = 0;
-
-interface EqProps {}
-
-const Eq: FC<EqProps> = () => {
-  const overDriveEl = useRef<null | HTMLInputElement>(null);
+const Eq = () => {
   const [context] = useState(new AudioContext());
   const [gainNode] = useState(new GainNode(context, { gain: 0 }));
-  const [distortion] = useState(() => context.createWaveShaper());
-  const [overDrive, setOverDrive] = useState(() => false);
-  const [analyserNode] = useState(
-    () => new AnalyserNode(context, { fftSize: 256 })
+  const [distortion, setDistortion] = useState<WaveShaperNode>(() =>
+    context.createWaveShaper()
   );
-  const [bufferLength] = useState(() => analyserNode.frequencyBinCount);
-  const [curve, noCurve] = useDistortion();
+  const [curve, noCurve] = useDistortion(); // Get the distortion curves from the custom hook
+  const [overDrive, setOverDrive] = useState(false);
+  const [analyserNode] = useState(new AnalyserNode(context, { fftSize: 256 }));
+  const [bufferLength] = useState(analyserNode.frequencyBinCount);
   const [bassEQ] = useState(
     () =>
       new BiquadFilterNode(context, {
@@ -45,22 +41,7 @@ const Eq: FC<EqProps> = () => {
       })
   );
 
-  const overDriveClick = () => {
-    setOverDrive(() => !overDrive);
-    let overDriveOn;
-    if (overDriveEl.current !== null) {
-      overDriveOn = !overDriveEl.current.checked;
-
-      if (overDriveOn === true) {
-        distortion.oversample = '4x';
-        distortion.curve = curve;
-      } else {
-        distortion.oversample = 'none';
-        distortion.curve = noCurve;
-      }
-    }
-  };
-  const [assignContext] = useViz(
+  const [assignContext] = useAudio(
     context,
     distortion,
     bassEQ,
@@ -68,45 +49,54 @@ const Eq: FC<EqProps> = () => {
     trebleEQ,
     gainNode,
     analyserNode,
-    bufferLength
+    bufferLength,
+    overDrive
   );
 
+  const overDriveClick = useCallback(() => {
+    setOverDrive(od => {
+      const distortionOn = !od;
+
+      setDistortion(prevDistortion => {
+        // Create a new WaveShaperNode only if overDrive state changes
+        const newDistortion = prevDistortion ?? context.createWaveShaper();
+        newDistortion.oversample = distortionOn ? '4x' : 'none';
+        newDistortion.curve = distortionOn ? curve : noCurve;
+        return newDistortion;
+      });
+      assignContext(); // Reconnect everything after updating distortion
+      return distortionOn;
+    });
+  }, [curve, noCurve, context, assignContext]);
+
   const handleVolume = (vol: number) => {
-    gainNode.gain.setTargetAtTime(vol / 100, context.currentTime, timeConstant);
+    gainNode.gain.setTargetAtTime(vol / 100, context.currentTime, 0);
     assignContext();
   };
 
   const handleBass = (bass: number) => {
-    bassEQ.gain.setTargetAtTime(bass * 0.1, context.currentTime, timeConstant);
+    bassEQ.gain.setTargetAtTime(bass / 100, context.currentTime, 0);
     assignContext();
   };
 
   const handleMid = (mid: number) => {
-    midEQ.gain.setTargetAtTime(mid * 0.1, context.currentTime, timeConstant);
+    midEQ.gain.setTargetAtTime(mid / 100, context.currentTime, 0);
     assignContext();
   };
 
   const handleTreble = (treble: number) => {
-    trebleEQ.gain.setTargetAtTime(
-      treble * 0.1,
-      context.currentTime,
-      timeConstant
-    );
+    trebleEQ.gain.setTargetAtTime(treble / 100, context.currentTime, 0);
     assignContext();
   };
 
   return (
-    <EqWrap>
-      <Knob title="Volume" onChange={handleVolume} />
-      <Knob title="Bass" onChange={handleBass} />
-      <Knob title="Mid" onChange={handleMid} />
-      <Knob title="Treble" onChange={handleTreble} />
-      <CheckBox
-        overDriveEl={overDriveEl}
-        onClick={overDriveClick}
-        checked={overDrive}
-      />
-    </EqWrap>
+    <EqStyled>
+      <Knob label="Volume" onChange={handleVolume} />
+      <Knob label="Bass" onChange={handleBass} />
+      <Knob label="Mid" onChange={handleMid} />
+      <Knob label="Treble" onChange={handleTreble} />
+      <CheckBox onClick={overDriveClick} on={overDrive} />
+    </EqStyled>
   );
 };
 

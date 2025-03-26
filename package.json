@@ -1,6 +1,6 @@
 {
-  "name": "ocml-amp",
-  "description": "A web amp.",
+  "name": "@ocml/amp",
+  "description": "A web-based guitar amp that lets you plug in and play instantly.",
   "author": "Marcus Badillo",
   "module": "dist/ocml-amp.esm.js",
   "size-limit": [
@@ -13,7 +13,7 @@
       "limit": "10 KB"
     }
   ],
-  "version": "0.1.4",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,8 +22,8 @@
     "src"
   ],
   "engines": {
-    "node": ">=10",
-    "npm": "7"
+    "node": "22.11.0",
+    "npm": "10.9.2"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -40,6 +40,11 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -47,32 +52,37 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.25.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@size-limit/preset-small-lib": "^8.2.6",
     "@size-limit/webpack": "^8.2.6",
     "@size-limit/webpack-why": "^8.2.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/react": "^18.3.19",
-    "@types/react-dom": "^18.3.5",
     "@types/styled-components": "^5.1.34",
+    "babel-jest": "^29.7.0",
+    "commitizen": "^4.3.1",
     "husky": "^8.0.3",
     "react": "^18.3.1",
     "react-device-detect": "^2.2.3",
-    "react-dom": "^18.3.1",
     "size-limit": "^8.2.6",
     "styled-components": "^5.3.11",
     "tsdx": "^0.14.1",
     "tslib": "^2.8.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.8.2"
   },
   "dependencies": {
-    "rc-knob": "^1.0.1"
+    "classnames": "^2.5.1"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-device-detect": "^2.2.2",
-    "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "react": "^18.3.1",
+    "styled-components": "^6.1.13"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

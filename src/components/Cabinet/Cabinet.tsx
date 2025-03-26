@@ -1,33 +1,13 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Canvas from '../Canvas/Canvas';
 import Logo from '../share/Logo/Logo';
 import { CabinetBase } from './Cabinet.styles';
 
-// enum CabinetType {
-//   one = 1,
-//   two = 2,
-//   three = 3,
-// }
-
-interface CabinetProps {
-  // cabinetType: number;
-}
-
-// const cabinet = new Map([
-//   [CabinetType.one, { src: orangeAmp, alt: 'OC Media Amp - Orange' }],
-// ]);
-
-const Cabinet: FC<CabinetProps> = () => {
+const Cabinet = () => {
   return (
     <CabinetBase>
       <Canvas />
-      <Logo
-        className={'ocml--logo'}
-        animateStroke={false}
-        stroke={'#ffffff'}
-        strokeWidth={'3'}
-        fill={'transparent'}
-      />
+      <Logo />
     </CabinetBase>
   );
 };

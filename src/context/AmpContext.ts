@@ -1,9 +1,6 @@
-import { createContext, MutableRefObject } from 'react';
+import { createContext } from 'react';
+import type { AmpContextDefaultValue } from '../types';
 
-interface AmpContextI {
-  canvas: MutableRefObject<HTMLCanvasElement>;
-}
-
-const AmpContext = createContext({} as AmpContextI);
+const AmpContext = createContext<AmpContextDefaultValue>(null!);
 
 export default AmpContext;

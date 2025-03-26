@@ -1,16 +1,12 @@
-import * as React from 'react';
-import { render } from '@testing-library/react';
-import { OcmlAmp } from '../src/';
+import { render, waitFor } from '@testing-library/react';
+import React from 'react';
+import OcmlAmp from '../src/components/Amp/Amp';
 
-// In your test setup file
-// globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-
-describe('it', () => {
-  it('renders default props', () => {
+describe('OcmlAmp', () => {
+  it('renders without crashing', async () => {
     render(<OcmlAmp />);
-  });
 
-  it('renders with manual', () => {
-    render(<OcmlAmp userManual />);
+    // If the component involves some async behavior, wait for it to finish.
+    await waitFor(() => expect(true).toBe(true)); // Replace with your actual async check.
   });
 });

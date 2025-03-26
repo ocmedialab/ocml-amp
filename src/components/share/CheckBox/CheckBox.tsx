@@ -1,27 +1,16 @@
-import React, { FC, MutableRefObject } from 'react';
-import { CheckBoxWrap } from './CheckBox.styles';
-import { Title } from '../..//share/Knob/Knob.styles';
+import cn from 'classnames';
+import React from 'react';
+import { KnobLabel } from '../Knob/Knob.styles';
+import { CheckBox, CheckBoxWrap } from './CheckBox.styles';
 
-interface CheckBoxProps {
-  overDriveEl: MutableRefObject<HTMLInputElement | null>;
-  checked: boolean;
-  onClick: () => void;
-}
-
-const CheckBox: FC<CheckBoxProps> = ({ onClick, overDriveEl, checked }) => {
+const CheckBox1 = ({ onClick, on }: any) => {
+  const className = cn([{ on }]);
   return (
-    <CheckBoxWrap>
-      <Title>Over Drive</Title>
-      <input
-        ref={overDriveEl}
-        className="checkbox"
-        type="checkbox"
-        readOnly
-        checked={checked}
-      />
-      <span onClick={onClick} className="checkmark" />
+    <CheckBoxWrap className={className}>
+      <CheckBox onClick={onClick} />
+      <KnobLabel>Over Drive</KnobLabel>
     </CheckBoxWrap>
   );
 };
 
-export default CheckBox;
+export default CheckBox1;
