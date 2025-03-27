@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   DialPath,
   DialSvg,
@@ -10,7 +10,7 @@ import {
   KnobLabel,
 } from './Knob.styles';
 
-const App = ({ label, onChange }: any) => {
+const Knob = ({ label, onChange }: any) => {
   const [knob, setKnob] = useState({
     id: 0,
     rotation: -132,
@@ -94,7 +94,7 @@ const App = ({ label, onChange }: any) => {
   );
 };
 
-export default App;
+export default memo(Knob);
 
 /*
   const [colorArray] = useState([

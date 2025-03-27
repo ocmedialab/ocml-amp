@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import useAudio from '../../hooks/useAudio';
 import useDistortion from '../../hooks/useDistortion';
-import { EqStyled } from '../Eq/Eq.styles';
 import CheckBox from '../share/CheckBox/CheckBox';
 import Knob from '../share/Knob/Knob';
+import { EqStyled, KnobsWrapStyled } from './Eq.styles';
 
 const Eq = () => {
   const [context] = useState(new AudioContext());
@@ -91,10 +91,13 @@ const Eq = () => {
 
   return (
     <EqStyled>
-      <Knob label="Volume" onChange={handleVolume} />
-      <Knob label="Bass" onChange={handleBass} />
-      <Knob label="Mid" onChange={handleMid} />
-      <Knob label="Treble" onChange={handleTreble} />
+      <KnobsWrapStyled>
+        <Knob label="Volume" onChange={handleVolume} />
+        <Knob label="Bass" onChange={handleBass} />
+        <Knob label="Mid" onChange={handleMid} />
+        <Knob label="Treble" onChange={handleTreble} />
+      </KnobsWrapStyled>
+
       <CheckBox onClick={overDriveClick} on={overDrive} />
     </EqStyled>
   );
