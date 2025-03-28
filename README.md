@@ -43,3 +43,14 @@ This project is maintained by Marcus Badillo, OC Media Lab and is licensed under
 We welcome contributions! If you'd like to contribute, please fork the repository, create a feature branch, and submit a pull request. All contributions will be reviewed and merged at the discretion of the project maintainers.
 
 By contributing, you agree to license your contributions under the MIT License.
+
+## 💡 Feature Requests and Contributions
+
+We welcome feature requests and contributions!  
+
+- To suggest a feature, [open an issue](https://github.com/ocmedialab/ocml-amp/issues/new?template=feature_request.md).
+- For pull requests, please review our [contributing guidelines](CONTRIBUTING.md).
+
+## commits
+
+<https://github.com/conventional-changelog/commitlint/#what-is-commitlint>
