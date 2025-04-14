@@ -13,13 +13,31 @@
       "limit": "10 KB"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocmedialab/ocml-amp.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "web design",
+    "ocmedialab",
+    "ecommerce"
+  ],
+  "bugs": {
+    "url": "https://github.com/ocmedialab/ocml-amp/issues"
+  },
+  "homepage": "https://github.com/ocmedialab/ocml-amp",
   "version": "1.0.2",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": "22.11.0",
@@ -81,8 +99,5 @@
   "peerDependencies": {
     "react": "^18.3.1",
     "styled-components": "^6.1.13"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
