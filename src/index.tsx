@@ -1,5 +1,1 @@
-import OcmlAmp from './components/Amp/Amp';
-
-export interface OcmlAmp {}
-
-export { OcmlAmp };
+export { OcmlAmp } from '@/components/OcmlAmp/OcmlAmp';

@@ -14,7 +14,7 @@ export const getAudio = async (): Promise<MediaStream> => {
 export const setupAudioPipeline = (
   source: MediaStreamAudioSourceNode,
   nodes: AudioNode[],
-  destination: AudioDestinationNode
+  destination: AudioDestinationNode,
 ) => {
   nodes.reduce<AudioNode>((prev, curr) => {
     if (prev) prev.connect(curr);

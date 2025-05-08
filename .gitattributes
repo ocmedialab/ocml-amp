@@ -1,1 +1,29 @@
+# Handle line endings in a cross-platform way:
+# - Automatically normalize line endings for text files
+# - Windows will use CRLF when checking out files, and Unix-based systems will use LF
 * text=auto
+
+# Force specific file types to use LF line endings regardless of platform
+*.sh   eol=lf    # Shell scripts (UNIX line endings)
+*.json eol=lf    # JSON files should have LF line endings
+*.css  eol=lf    # CSS files should have LF line endings
+*.html eol=lf    # HTML files should have LF line endings
+*.xml  eol=lf    # XML files should have LF line endings
+
+# Treat certain files as binary so Git doesn't try to diff them:
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+*.mp4  binary
+*.mp3  binary
+
+# Ignore unnecessary files in exports
+*.md export-ignore   # Ignore markdown files when exporting the repository
+*.log export-ignore  # Ignore log files in exports
+*.tsbuildinfo export-ignore  # Ignore TypeScript build info files
+
+# Merge strategy for JSON files, use 'union' to preserve changes from both branches
+*.json merge=union

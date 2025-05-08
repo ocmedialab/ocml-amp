@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import useAudio from '../../hooks/useAudio';
 import useDistortion from '../../hooks/useDistortion';
 import CheckBox from '../share/CheckBox/CheckBox';
@@ -8,9 +8,7 @@ import { EqStyled, KnobsWrapStyled } from './Eq.styles';
 const Eq = () => {
   const [context] = useState(new AudioContext());
   const [gainNode] = useState(new GainNode(context, { gain: 0 }));
-  const [distortion, setDistortion] = useState<WaveShaperNode>(() =>
-    context.createWaveShaper()
-  );
+  const [distortion, setDistortion] = useState<WaveShaperNode>(() => context.createWaveShaper());
   const [curve, noCurve] = useDistortion(); // Get the distortion curves from the custom hook
   const [overDrive, setOverDrive] = useState(false);
   const [analyserNode] = useState(new AnalyserNode(context, { fftSize: 256 }));
@@ -21,7 +19,7 @@ const Eq = () => {
         type: 'lowshelf',
         frequency: 500,
         gain: 0,
-      })
+      }),
   );
   const [midEQ] = useState(
     () =>
@@ -30,7 +28,7 @@ const Eq = () => {
         Q: Math.SQRT1_2,
         frequency: 1500,
         gain: 0,
-      })
+      }),
   );
   const [trebleEQ] = useState(
     () =>
@@ -38,7 +36,7 @@ const Eq = () => {
         type: 'highshelf',
         frequency: 3000,
         gain: 0,
-      })
+      }),
   );
 
   const [assignContext] = useAudio(
@@ -50,14 +48,14 @@ const Eq = () => {
     gainNode,
     analyserNode,
     bufferLength,
-    overDrive
+    overDrive,
   );
 
   const overDriveClick = useCallback(() => {
-    setOverDrive(od => {
+    setOverDrive((od) => {
       const distortionOn = !od;
 
-      setDistortion(prevDistortion => {
+      setDistortion((prevDistortion) => {
         // Create a new WaveShaperNode only if overDrive state changes
         const newDistortion = prevDistortion ?? context.createWaveShaper();
         newDistortion.oversample = distortionOn ? '4x' : 'none';

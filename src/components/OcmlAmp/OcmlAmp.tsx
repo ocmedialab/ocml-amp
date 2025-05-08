@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
 import AmpProvider from '../../providers/AmpProvider';
 import Cabinet from '../Cabinet/Cabinet';
 import Eq from '../Eq/Eq';
-import AmpWrap from './Amp.styles';
+import AmpWrap from './OcmlAmp.styles.';
 
-const Amp: FC = () => {
+export const OcmlAmp = () => {
   return (
     <AmpProvider>
       <AmpWrap>
@@ -14,5 +13,3 @@ const Amp: FC = () => {
     </AmpProvider>
   );
 };
-
-export default Amp;

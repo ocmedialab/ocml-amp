@@ -1,0 +1,28 @@
+# .editorconfig configuration file
+root = true
+
+# General settings for all files
+[*]
+end_of_line = lf
+charset = utf-8
+insert_spaces = true
+indent_size = 2
+trim_trailing_whitespace = true
+
+# Specific settings for JavaScript/TypeScript files
+[*.{js,ts,tsx}]
+indent_size = 2
+indent_style = space
+insert_spaces = true
+max_line_length = 100
+quote_type = single
+trailing_comma = always
+
+# JSON files settings (if needed)
+[*.json]
+indent_size = 2
+indent_style = space
+
+# Markdown files settings
+[*.md]
+max_line_length = 100

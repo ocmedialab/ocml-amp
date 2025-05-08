@@ -1,5 +1,4 @@
-import cn from 'classnames';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   DialPath,
   DialSvg,
@@ -10,7 +9,12 @@ import {
   KnobLabel,
 } from './Knob.styles';
 
-const Knob = ({ label, onChange }: any) => {
+type KnobProps = {
+  label: string;
+  onChange: (percent: number) => void;
+};
+
+const Knob = ({ label, onChange }: KnobProps) => {
   const [knob, setKnob] = useState({
     id: 0,
     rotation: -132,
@@ -24,12 +28,9 @@ const Knob = ({ label, onChange }: any) => {
     (e: MouseEvent) => {
       if (!knob.selected) return;
       console.log('mousemoveFunction()');
-      const newRotation = Math.min(
-        132,
-        Math.max(-132, knob.rotation - (e.pageY - currentY))
-      );
+      const newRotation = Math.min(132, Math.max(-132, knob.rotation - (e.pageY - currentY)));
       const percent = ((newRotation + 132) / 264) * 100;
-      setKnob(prev => ({
+      setKnob((prev) => ({
         ...prev,
         rotation: newRotation,
         active: percent >= 0.001,
@@ -38,11 +39,11 @@ const Knob = ({ label, onChange }: any) => {
 
       onChange(percent);
     },
-    [currentY, knob.selected, knob.rotation]
+    [currentY, knob.selected, knob.rotation],
   );
 
   const unselectKnobs = useCallback(() => {
-    setKnob(prev => ({
+    setKnob((prev) => ({
       ...prev,
       selected: false,
       active: prev.rotation !== -132,
@@ -58,16 +59,12 @@ const Knob = ({ label, onChange }: any) => {
     };
   }, [mousemoveFunction, unselectKnobs]);
 
-  const className = useMemo(() => cn([{ active: knob.active }]), [knob.active]);
-
-  const dashOffset = useMemo(() => 184 - 184 * ((knob.rotation + 132) / 264), [
-    knob.rotation,
-  ]);
+  const dashOffset = useMemo(() => 184 - 184 * ((knob.rotation + 132) / 264), [knob.rotation]);
 
   const OnMouseDown = useCallback(
     (e: any) => {
       e.preventDefault();
-      setKnob(prev => {
+      setKnob((prev) => {
         return {
           ...prev,
           selected: true,
@@ -76,9 +73,9 @@ const Knob = ({ label, onChange }: any) => {
 
       setCurrentY(e.pageY);
     },
-    [currentY, knob.selected, knob.rotation]
+    [currentY, knob.selected, knob.rotation],
   );
-
+  const className = knob.active ? 'active' : undefined;
   return (
     <Knob2Styles className={className}>
       <KnobActiveLight />

@@ -1,9 +1,6 @@
-import styled from 'styled-components';
-// import pat1 from '../../assets/img/ocml-amp-pat-1.jpg';
+import styled from '@emotion/styled';
 
 export default styled.div`
-  /* width: 600px; */
-  /* height: 500px; */
   border-width: 15px;
   border-style: solid;
   border-color: rgb(27 27 27);

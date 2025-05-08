@@ -1,12 +1,24 @@
-name: size
-on: [pull_request]
+name: Size Check
+
+on:
+  pull_request:
+
 jobs:
   size:
+    name: Check Bundle Size
     runs-on: ubuntu-latest
-    env:
-      CI_JOB_NUMBER: 1
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: andresz1/size-limit-action@v1
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run size-limit
+        run: npm run size

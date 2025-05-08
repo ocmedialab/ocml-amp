@@ -11,15 +11,15 @@ export type UseAudio = (
   gainNode: GainNode,
   analyserNode: AnalyserNode,
   bufferLength: number,
-  overDrive: boolean
+  overDrive: boolean,
 ) => [() => Promise<void>];
 
-export interface AmpContextType {
+export type AmpContextType = {
   canvas: MutableRefObject<HTMLCanvasElement | null>;
-}
+};
 
-export interface AmpContextDefaultValue {
+export type AmpContextDefaultValue = {
   canvas: MutableRefObject<HTMLCanvasElement | null>;
-}
+};
 
 export type UseDistortionHook = (K?: number) => [Float32Array, Float32Array];

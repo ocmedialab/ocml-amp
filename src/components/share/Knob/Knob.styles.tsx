@@ -1,17 +1,15 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
-interface DialPathProps {
+type DialPathProps = {
   $dashOffset?: number;
-}
+};
 
 export const DialPath = styled.path<DialPathProps>`
   fill: none;
   stroke-dashoffset: ${({ $dashOffset }) => $dashOffset};
 `;
 
-export const DialSvg = styled.svg.attrs({
-  viewBox: '0 0 100 100',
-})`
+export const DialSvg = styled.svg`
   pointer-events: none;
   position: absolute;
   stroke-width: 8;
@@ -19,7 +17,7 @@ export const DialSvg = styled.svg.attrs({
   stroke-linecap: round !important;
 
   ${DialPath} {
-    stroke: #55595C; 
+    stroke: #55595c;
   }
 
   ${DialPath} + ${DialPath} {
@@ -65,8 +63,7 @@ export const KnobDialGrip = styled.div<{ $rotation: number }>`
   height: 72px;
   width: 72px;
   border: 6px solid #181b1c;
-  transform: ${({ $rotation }) =>
-    `translate(-50%,-50%) rotate(${$rotation}deg)`};
+  transform: ${({ $rotation }) => `translate(-50%,-50%) rotate(${$rotation}deg)`};
   &::after {
     content: '';
     position: absolute;
@@ -94,8 +91,8 @@ export const Knob2Styles = styled.div`
     }
     ${DialSvg} {
       ${DialPath} + ${DialPath} {
-        stroke: #FA9C34;
-      } 
+        stroke: #fa9c34;
+      }
     }
   }
 

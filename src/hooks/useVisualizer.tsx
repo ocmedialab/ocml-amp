@@ -1,10 +1,12 @@
 import { MutableRefObject, useCallback } from 'react';
-import { ResizeViz } from '../types';
+
+// Utility Types
+export type ResizeViz = (viz: HTMLCanvasElement) => void;
 
 const useVisualizer = (
   canvasRef: MutableRefObject<HTMLCanvasElement | null>,
   analyserNode: AnalyserNode,
-  bufferLength: number
+  bufferLength: number,
 ) => {
   const resize: ResizeViz = useCallback((viz: HTMLCanvasElement) => {
     if (viz) {
