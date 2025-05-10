@@ -58,7 +58,6 @@ For the most authentic amp experience, we recommend using Chrome Desktop.
 
 ## Local Development
 
-![build](https://github.com/ocmedialab/ocml-amp/actions/workflows/main.yml/badge.svg)
 ![npm](https://img.shields.io/npm/v/@ocmedialab/amp?color=blue)
 ![license](https://img.shields.io/npm/l/@ocmedialab/amp)
 ![node](https://img.shields.io/node/v/@ocmedialab/amp)

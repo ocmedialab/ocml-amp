@@ -2,10 +2,8 @@ name: '@ocmedialab/amp - Release & Publish to npm'
 
 on:
   push:
-    branches:
-      - main
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*' # Trigger on version tags only, like v2.0.1, v1.0.0, etc.
 
 jobs:
   release:
