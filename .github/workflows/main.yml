@@ -2,6 +2,8 @@ name: '@ocmedialab/amp - Release & Publish to npm'
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*.*.*'
 
