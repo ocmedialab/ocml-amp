@@ -1,7 +1,11 @@
-import { useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import AmpContext from '../context/AmpContext';
 
-const AmpProvider = ({ children }: any) => {
+interface AmpProviderProps {
+  children: ReactNode;
+}
+
+const AmpProvider = ({ children }: AmpProviderProps) => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
 
   return <AmpContext.Provider value={{ canvas }}>{children}</AmpContext.Provider>;

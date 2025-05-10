@@ -4,11 +4,16 @@
 * text=auto
 
 # Force specific file types to use LF line endings regardless of platform
-*.sh   eol=lf    # Shell scripts (UNIX line endings)
-*.json eol=lf    # JSON files should have LF line endings
-*.css  eol=lf    # CSS files should have LF line endings
-*.html eol=lf    # HTML files should have LF line endings
-*.xml  eol=lf    # XML files should have LF line endings
+# Shell scripts (UNIX line endings)
+*.sh   eol=lf
+# JSON files should have LF line endings
+*.json eol=lf
+# CSS files should have LF line endings
+*.css  eol=lf
+# HTML files should have LF line endings
+*.html eol=lf
+# XML files should have LF line endings
+*.xml  eol=lf
 
 # Treat certain files as binary so Git doesn't try to diff them:
 *.jpg  binary
@@ -21,9 +26,12 @@
 *.mp3  binary
 
 # Ignore unnecessary files in exports
-*.md export-ignore   # Ignore markdown files when exporting the repository
-*.log export-ignore  # Ignore log files in exports
-*.tsbuildinfo export-ignore  # Ignore TypeScript build info files
+# Ignore markdown files when exporting the repository
+*.md export-ignore
+# Ignore log files in exports
+*.log export-ignore
+# Ignore TypeScript build info files
+*.tsbuildinfo export-ignore
 
 # Merge strategy for JSON files, use 'union' to preserve changes from both branches
 *.json merge=union

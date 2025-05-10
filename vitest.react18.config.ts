@@ -14,13 +14,18 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./test/jest.setupTests.ts'],
-    include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}'],
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
     deps: {
       optimizer: {
         web: {
           include: ['@testing-library/react'],
         },
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
     },
   },
 });

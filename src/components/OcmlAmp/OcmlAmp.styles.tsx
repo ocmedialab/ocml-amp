@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export default styled.div`
+export const OcmlAmpWrapStyled = styled.div`
   border-width: 15px;
   border-style: solid;
   border-color: rgb(27 27 27);

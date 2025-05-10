@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CheckBox = styled.div`
+export const CheckBoxStyled = styled.div`
   height: 52px;
   width: 52px;
   background-color: rgb(85, 89, 92);
@@ -42,7 +42,7 @@ export const CheckBoxWrap = styled.div`
   justify-content: flex-end;
 
   &.on {
-    ${CheckBox} {
+    ${CheckBoxStyled} {
       background-color: rgb(250, 156, 52);
       &::after {
         content: 'ON';

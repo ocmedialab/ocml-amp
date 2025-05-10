@@ -28,6 +28,34 @@ import { OcmlAmp } from '@ocmedialab/amp';
 <OcmlAmp />;
 ```
 
+## 🌐 Browser Compatibility
+
+The amp simulator has been tested across different browsers and platforms. For the best experience:
+
+### Recommended
+
+- **Chrome Desktop** (Best Performance)
+    - Optimal audio processing
+    - Most accurate amp simulation
+    - Best visualization performance
+    - Recommended for professional use
+
+### Supported
+
+- **Safari Desktop**
+    - Good performance
+    - Slight differences in audio processing
+    - Minor visualization differences
+
+### Known Differences
+
+- Audio processing varies between browsers due to different Web Audio API implementations
+- Chrome provides the most accurate and consistent sound
+- Safari may have slightly different EQ and distortion characteristics
+- Mobile browsers may have reduced performance
+
+For the most authentic amp experience, we recommend using Chrome Desktop.
+
 ## Local Development
 
 ![build](https://github.com/ocmedialab/ocml-amp/actions/workflows/main.yml/badge.svg)
@@ -55,7 +83,7 @@ By contributing, you agree to license your contributions under the MIT License.
 
 ## 💡 Feature Requests and Contributions
 
-We welcome feature requests and contributions!  
+We welcome feature requests and contributions!
 
 - To suggest a feature, [open an issue](https://github.com/ocmedialab/ocml-amp/issues/new?template=feature_request.md).
 - For pull requests, please review our [contributing guidelines](CONTRIBUTING.md).
@@ -63,3 +91,57 @@ We welcome feature requests and contributions!
 ## commits
 
 [How to commit](https://github.com/conventional-changelog/commitlint/#what-is-commitlint)
+
+## TODO / MAYBE - Cutting-Edge Web Audio
+
+The following modern Web Audio API features are planned for future implementation:
+
+1. **AudioWorklet for Custom Processing**
+   - Custom distortion algorithms
+   - Better performance for complex audio processing
+   - More control over the signal chain
+
+2. **ConvolverNode for Cabinet Simulation**
+   - Realistic cabinet impulse responses
+   - Different speaker types and mic positions
+   - More authentic amp sound
+
+3. **DynamicsCompressorNode**
+   - Dynamic range control
+   - Consistent sound levels
+   - Authentic amp "squash"
+
+4. **Spatial Audio with PannerNode**
+   - Stereo width control
+   - Multiple mic positions
+   - Immersive sound experience
+
+5. **WebGL Visualization**
+   - High-performance audio visualization
+   - Detailed frequency analysis
+   - Responsive real-time graphics
+
+6. **MediaStreamTrackAudioSourceNode**
+   - Advanced input processing
+   - Multiple input source support
+   - Lower latency
+
+7. **OfflineAudioContext**
+   - Preset management
+   - Offline audio processing
+   - Professional features
+
+8. **Stereo Processing**
+   - Channel splitting and merging
+   - Separate L/R processing
+   - Complex stereo effects
+
+9. **IIRFilterNode**
+   - Precise EQ control
+   - Custom filter responses
+   - Advanced tone shaping
+
+10. **AudioParam Automation**
+    - Parameter automation
+    - Dynamic effects
+    - Expressive control

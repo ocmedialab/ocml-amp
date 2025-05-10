@@ -24,6 +24,10 @@ export type AmpContextValue = {
 } & AudioNodes &
   CanvasRef;
 
-const AmpContext = createContext<AmpContextValue>(null!);
+const defaultContext: AmpContextValue = {
+  canvas: { current: null },
+};
+
+const AmpContext = createContext<AmpContextValue>(defaultContext);
 
 export default AmpContext;

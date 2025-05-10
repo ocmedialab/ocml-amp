@@ -1,6 +1,6 @@
-import { useCallback, useContext } from 'react';
+import useVisualizer from '@/hooks/useVisualizer';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import AmpContext from '../context/AmpContext';
-import useVisualizer from '../hooks/useVisualizer';
 import { getAudio, setupAudioPipeline } from '../utils/audioUtils';
 
 export type UseAudio = (
@@ -27,35 +27,52 @@ const useAudio: UseAudio = (
   overDrive,
 ) => {
   const { canvas } = useContext(AmpContext);
-  const drawVisualizer = useVisualizer(canvas, analyserNode, bufferLength);
+  const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
+  useVisualizer(canvas, analyserNode, bufferLength);
 
   const assignContext = useCallback(async () => {
     const audio = await getAudio();
     if (context.state === 'suspended') {
       await context.resume();
     }
-    const source = context.createMediaStreamSource(audio);
+    sourceRef.current = context.createMediaStreamSource(audio);
+    updateAudioChain();
+  }, [context]);
 
-    // Setup audio pipeline with or without distortion based on overDrive
+  const safeDisconnect = useCallback((node: any) => {
+    if (node && typeof node.disconnect === 'function') {
+      node.disconnect();
+    }
+  }, []);
+
+  const updateAudioChain = useCallback(() => {
+    if (!sourceRef.current) return;
+
+    // Disconnect all nodes
+    safeDisconnect(sourceRef.current);
+    safeDisconnect(distortion);
+    safeDisconnect(bassEQ);
+    safeDisconnect(midEQ);
+    safeDisconnect(trebleEQ);
+    safeDisconnect(gainNode);
+    safeDisconnect(analyserNode);
+
+    // Reconnect based on overDrive state
     if (overDrive) {
       setupAudioPipeline(
-        source,
+        sourceRef.current,
         [distortion, bassEQ, midEQ, trebleEQ, gainNode, analyserNode],
         context.destination,
       );
     } else {
       setupAudioPipeline(
-        source,
-        [bassEQ, midEQ, trebleEQ, gainNode, analyserNode], // Clean path without distortion
+        sourceRef.current,
+        [bassEQ, midEQ, trebleEQ, gainNode, analyserNode],
         context.destination,
       );
     }
-
-    // Start visualizing audio data
-    drawVisualizer();
   }, [
     context,
-    drawVisualizer,
     overDrive,
     distortion,
     bassEQ,
@@ -63,7 +80,13 @@ const useAudio: UseAudio = (
     trebleEQ,
     gainNode,
     analyserNode,
+    safeDisconnect,
   ]);
+
+  // Update audio chain when overDrive changes
+  useEffect(() => {
+    updateAudioChain();
+  }, [overDrive, updateAudioChain]);
 
   return [assignContext];
 };

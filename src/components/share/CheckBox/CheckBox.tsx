@@ -1,13 +1,21 @@
 import { KnobLabel } from '../Knob/Knob.styles';
-import { CheckBox, CheckBoxWrap } from './CheckBox.styles';
+import { CheckBoxStyled, CheckBoxWrap } from './CheckBox.styles';
 
-const CheckBox1 = ({ onClick, on }: any) => {
+type KnobProps = {
+  label: string;
+  on: boolean;
+  onClick: any;
+};
+
+const CheckBox = ({ onClick, on, label }: KnobProps) => {
   return (
-    <CheckBoxWrap className={on ? 'on' : undefined}>
-      <CheckBox onClick={onClick} />
-      <KnobLabel>Over Drive</KnobLabel>
+    <CheckBoxWrap className={on ? 'on' : ''}>
+      <CheckBoxStyled onClick={onClick} />
+      <KnobLabel role="button" aria-label={label}>
+        {label}
+      </KnobLabel>
     </CheckBoxWrap>
   );
 };
 
-export default CheckBox1;
+export default CheckBox;

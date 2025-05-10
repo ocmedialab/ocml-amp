@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback } from 'react';
+import { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
 // Utility Types
 export type ResizeViz = (viz: HTMLCanvasElement) => void;
@@ -8,6 +8,9 @@ const useVisualizer = (
   analyserNode: AnalyserNode,
   bufferLength: number,
 ) => {
+  const animationFrameId = useRef<number>();
+  const dataArray = useRef(new Uint8Array(bufferLength));
+
   const resize: ResizeViz = useCallback((viz: HTMLCanvasElement) => {
     if (viz) {
       viz.width = viz.clientWidth * window.devicePixelRatio;
@@ -20,18 +23,17 @@ const useVisualizer = (
     if (!viz) return;
 
     resize(viz);
-    requestAnimationFrame(drawVisualizer);
+    animationFrameId.current = requestAnimationFrame(drawVisualizer);
 
     const { width, height } = viz;
-    const dataArray = new Uint8Array(bufferLength);
-    analyserNode.getByteFrequencyData(dataArray);
+    analyserNode.getByteFrequencyData(dataArray.current);
 
     const barWidth = width / bufferLength;
     const canvasContext = viz.getContext('2d');
 
     if (canvasContext) {
-      // Check if the context is valid
-      dataArray.forEach((item, index) => {
+      canvasContext.clearRect(0, 0, width, height);
+      dataArray.current.forEach((item, index) => {
         const y = ((item / 170) * height) / 2;
         const x = barWidth * index;
         const gradient = canvasContext.createLinearGradient(0, 0, height, 0);
@@ -41,9 +43,22 @@ const useVisualizer = (
         canvasContext.fillRect(x, height - y, barWidth, y);
       });
     }
-  }, [canvasRef, analyserNode, bufferLength]);
+  }, [canvasRef, analyserNode, bufferLength, resize]);
 
-  return drawVisualizer;
+  // Cleanup function
+  const cleanup = useCallback(() => {
+    if (animationFrameId.current) {
+      cancelAnimationFrame(animationFrameId.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    drawVisualizer();
+
+    return () => {
+      cleanup();
+    };
+  }, []);
 };
 
 export default useVisualizer;
